@@ -11,7 +11,8 @@
   ],
   "scripts": {
     "serve": "gitbook serve",
-    "init": "gitbook init"
+    "init": "gitbook init",
+	"pdf": "gitbook pdf"
   },
   "husky": {
     "hooks": {
