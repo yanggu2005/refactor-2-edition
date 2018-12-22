@@ -1,0 +1,31 @@
+{
+  "name": "refactor-2-edition",
+  "version": "0.1.0",
+  "description": "Chinese translation of Refactor second edition by Martin Fowler.",
+  "main": "SUMMARY.md",
+  "keywords": [
+    "refactor",
+    "second-edition",
+    "chinese",
+    "translation"
+  ],
+  "scripts": {
+    "serve": "gitbook serve",
+    "init": "gitbook init"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "./scripts/lint-changed-markdowns.sh"
+    }
+  },
+  "devDependencies": {
+    "gitbook-cli": "^2.3.2",
+    "husky": "^1.2.1",
+    "prettier": "^1.12.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "/Users/cylin/Linesh/syncing/Dropbox/git-repos/refactor-2-edition.git"
+  },
+  "license": "ISC"
+}
