@@ -1,0 +1,1 @@
+# Combine Functions into Class
