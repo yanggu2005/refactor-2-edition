@@ -4,6 +4,6 @@
 committingMarkdowns=$(git diff HEAD --name-only --diff-filter=ACMRT -- '*.md')
 
 if [[ -n "$committingMarkdowns" ]]; then
-  prettier --write ${committingMarkdowns}
+  prettier --write ${committingMarkdowns} --loglevel slient
   git add ${committingMarkdowns}
 fi
