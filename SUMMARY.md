@@ -1,8 +1,8 @@
 # Summary
 
 * [Introduction](README.md)
-* [Foreword to the First Edition](FOREWARD.md)
-* [Preface](PREFACE.md)
+* [Foreword to the First Edition](publish/FOREWARD.md)
+* [Preface](publish/PREFACE.md)
 * [Chapter 1: Refactoring: A First Example](publish/01-00-Refactoring-A-First-Example.md)
   * [The Starting Point](publish/01-01-The-Starting-Point.md)
   * [Comments on the Starting Program](publish/01-02-Comments-on-the-Starting-Program.md)
@@ -130,5 +130,5 @@
   * [Collapse Hierarchy](publish/12-09-Collapse-Hierarchy.md)
   * [Replace Subclass with Delegate](publish/12-10-Replace-Subclass-with-Delegate.md)
   * [Replace Superclass with Delegate](publish/12-11-Replace-Superclass-with-Delegate.md)
-* [Bibliography](BIBLIOGRAPHY.md)
-* [Index](INDEX.md)
+* [Bibliography](publish/BIBLIOGRAPHY.md)
+* [Index](publish/INDEX.md)
