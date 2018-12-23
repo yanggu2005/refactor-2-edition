@@ -101,6 +101,6 @@ Ralph Johnson在UIUC（伊利诺伊大学厄巴纳—尚佩恩分校）领导了
 
 有了一个比较完整的初稿之后，我将它发送出去，寻求更多的审阅意见，因为我希望有一些全新的眼光来纵览全书。William Chargin和Michael Hunger提供了极其详尽的审阅意见。我还从Bob Martin和Scott Davis那里得到了很多有用的意见。Bill Wake也对本书初稿做了完整的审阅，并在邮件列表中给出了他的意见。
 
-我在ThoughtWorks的同事一直给我的写作提供想法和反馈。数不胜数的问题、评论和观点推动着本书的思考与写作。作为ThoughtWorks员工最好的一件事，就是这家公司允许我花大量时间来写作。我尤其要感谢我们的CTO Rebecca Parsons经常与我交流，给了我很多想法。
+我在ThoughtWorks的同事一直给我的写作提供想法和反馈。数不胜数的问题、评论和观点推动着本书的思考与写作。作为ThoughtWorks员工最好的一件事，就是这家公司允许我花大量时间来写作。我尤其要感谢Rebecca Parsons（我们的CTO）经常与我交流，给了我很多想法。
 
 在培生出版集团，Greg Doench是负责本书的策划编辑，他解决了无数的问题，最终使本书得以出版。Julie Nahil是责任印制。Dmitry Kirsanov负责了文字编辑工作，Alina Kirsanova负责了排版和制作索引，我也很高兴与他们合作。
