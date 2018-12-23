@@ -2,7 +2,7 @@
 
 * [Introduction](README.md)
 * [第一版序](publish/00-00-Foreword-to-the-First-Edition.md)
-* [Preface](publish/00-01-Preface.md)
+* [前言](publish/00-01-Preface.md)
 * [Chapter 1: Refactoring: A First Example](publish/01-00-Refactoring-A-First-Example.md)
   * [The Starting Point](publish/01-01-The-Starting-Point.md)
   * [Comments on the Starting Program](publish/01-02-Comments-on-the-Starting-Program.md)
