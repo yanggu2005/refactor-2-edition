@@ -77,28 +77,30 @@
 * 如果你想知道该在什么地方重构，请阅读第3章。它会告诉你一些代码特征，这些特征指出“这里需要重构”。
 * 如果你想着手进行重构，请完整阅读前四章，然后选择性地阅读重构列表。一开始只需概略浏览列表，看看其中有些什么，不必理解所有细节。一旦真正需要实施某个准则，再详细阅读它，从中获取帮助。列表部分是供查阅的参考性内容，你不必一次就把它全部读完。
 
-An important part of writing this book was naming the various refactorings. Terminology helps us communicate, so that when one developer advises another to extract some code into a function, or to split some computation into separate phases, both understand the references to Extract Function and Split Phase. This vocabulary also helps in selecting automated refactorings.
+给形形色色的重构手法命名是写作这本书的重要部分。合适的词汇能帮助我们彼此沟通。当一名开发者向另一名开发者提出建议，将一段代码提取成为一个函数、或者将计算逻辑拆分成几个阶段，双方都能理解“提取函数”和“拆分阶段”是什么意思。这份词汇表也能帮助开发者们选择自动化的重构手法。
 
-Building on a Foundation Laid by Others
-I need to say right at the beginning that I owe a big debt with this book—a debt to those whose work in the 1990s developed the field of refactoring. It was learning from their experience that inspired and informed me to write the first edition of this book, and although many years have passed, it's important that I continue to acknowledge the foundation that they laid. Ideally, one of them should have written that first edition, but I ended up being the one with the time and energy.
+## 站在前人的肩膀上
 
-Two of the leading early proponents of refactoring were Ward Cunningham and Kent Beck. They used it as a foundation of development in the early days and adapted their development processes to take advantage of it. In particular, it was my collaboration with Kent that showed me the importance of refactoring—an inspiration that led directly to this book.
+就在本书一开始的此时此刻，我必须说：这本书让我欠了一大笔人情债，欠那些在1990年代做了大量研究工作并开创重构领域的人一大笔债。学习他们的经验启发了我撰写本书第一版，尽管已经过去了很多年，我仍然必须感谢他们打下的基础。这本书原本应该由他们之中的某个人来写，但最后却是由我这个有时间有精力的人捡了便宜。
 
-Ralph Johnson leads a group at the University of Illinois at Urbana-Champaign that is notable for its practical contributions to object technology. Ralph has long been a champion of refactoring, and several of his students did vital early work in this field. Bill Opdyke developed the first detailed written work on refactoring in his doctoral thesis. John Brant and Don Roberts went beyond writing words—they created the first automated refactoring tool, the Refactoring Browser, for refactoring Smalltalk programs.
+重构技术的两位最早倡导者是Ward Cunningham和Kent Beck。他们很早就把重构作为软件开发的一块基石，并且在自己的开发过程中运用它。尤其需要说明的是，正因为和Kent的合作，才让我真正看到了重构的重要性，并直接激励了我写出这本书。
 
-Many people have advanced the field of refactoring since the first edition of this book. In particular, the work of those who have added automated refactorings to development tools have contributed enormously to making programmers' lives easier. It's easy for me to take it for granted that I can rename a widely used function with a simple key sequence—but that ease relies on the efforts of IDE teams whose work helps us all.
+Ralph Johnson在UIUC（伊利诺伊大学厄巴纳—尚佩恩分校）领导了一个小组，这个小组因其在对象技术方面的实际贡献而声名远扬。Ralph很早就是重构技术的拥护者，他的一些学生也一直在研究这个课题。Bill Opdyke的博士论文是重构研究的第一份详细的书面成果。John Brant和Don Roberts则早已不满足于写文章了，他们创造了第一个自动化的重构工具，这个叫做Refactoring Browser（重构浏览器）的工具可以用于重构Smalltalk程序。
 
-Acknowledgments
-Even with all that research to draw on, I still needed a lot of help to write this book. The first edition drew greatly on experience and encouragement from Kent Beck. He first introduced me to refactoring, inspired me to start writing notes to record refactorings, and helped form them into finished prose. He came up with the idea of Code Smells. I often feel he would have written the first edition better than I had done—if we wasn't writing the foundation book for Extreme Programming instead.
+自本书第一版问世以来，很多人推动了重构领域的发展。尤其是开发工具中的自动化重构功能，让程序员的生活轻松了许多。如今我只要简单地敲几下键盘就可以给一个被大量使用的函数改名，对此我已经习以为常，但在这快捷的操作背后，离不开IDE开发团队的辛勤劳动。
 
-All the technical book authors I know mention the big debt they owe to technical reviewers. We've all written works with big flaws that were only caught by our peers acting as reviewers. I don't do a lot of technical review work myself, partly because I don't think I'm very good at it, so I have a lot of admiration for those who take it on. There's not even a pittance to be made by reviewing someone else's book, so doing it is a great act of generosity.
+## 致谢
 
-When I started serious work on the book, I formed a mailing list of advisors to give me feedback. As I made progress, I sent drafts of new material to this group and asked them for their feedback. I want to thank the following for posting their feedback on the mailing list: Arlo Belshee, Avdi Grimm, Beth Anders-Beck, Bill Wake, Brian Guthrie, Brian Marick, Chad Wathington, Dave Farley, David Rice, Don Roberts, Fred George, Giles Alexander, Greg Doench, Hugo Corbucci, Ivan Moore, James Shore, Jay Fields, Jessica Kerr, Joshua Kerievsky, Kevlin Henney, Luciano Ramalho, Marcos Brizeno, Michael Feathers, Patrick Kua, Pete Hodgson, Rebecca Parsons, and Trisha Gee.
+尽管有这些研究成果可以借鉴，我还是需要很多协助才能写出这本书。本书的第一版极大地得益于Kent Beck的经验与鼓励。起初向我介绍重构的是他，鼓励我开始书面记录重构手法的是他，帮助我把重构手法组织成型的也是他，提出“代码味道”这个概念的还是他。我常常感觉，他本可以把本书的第一版写得更好——如果当时他不是在忙着撰写极限编程的奠基之作《解析极限编程》的话。
 
-Of this group, I'd particularly like to highlight the special help I got on JavaScript from Beth Anders-Beck, James Shore, and Pete Hodgson.
+我认识的所有技术图书作者都会提到，技术审阅者提供了巨大的帮助。我们作品都会有巨大的缺陷，只有同行审阅者能发现这些缺陷。我自己并不常做技术审阅，部分原因是我认为自己并不擅长，所以我对优秀的技术审阅者总是满怀敬意。帮别人审稿所得的报酬微不足道，所以这完全是一件慷慨之举。
 
-Once I had a pretty complete first draft, I sent it out for further review, because I wanted to have some fresh eyes look at the draft as a whole. William Chargin and Michael Hunger both delivered incredibly detailed review comments. I also got many useful comments from Bob Martin and Scott Davis. Bill Wake added to his contributions on the mailing list by doing a full review of the first draft.
+正式开始写作本书时，我建了一个邮件列表，其中都是能给我提供反馈的建议者。随着写作的进展，我不断把新的草稿发到这个群里，请他们给我反馈。我要感谢这些人在邮件列表中提供的反馈：Arlo Belshee、Avdi Grimm、Beth Anders-Beck、Bill Wake、Brian Guthrie、Brian Marick、Chad Wathington、Dave Farley、David Rice、Don Roberts、Fred George、Giles Alexander、Greg Doench、Hugo Corbucci、Ivan Moore、James Shore、Jay Fields、Jessica Kerr、Joshua Kerievsky、Kevlin Henney、Luciano Ramalho、Marcos Brizeno、Michael Feathers、Patrick Kua、Pete Hodgson、Rebecca Parsons和Trisha Gee。
 
-My colleagues at ThoughtWorks are a constant source of ideas and feedback on my writing. There are innumerable questions, comments, and observations that have fueled the thinking and writing of this book. One of the great things about being an employee at ThoughtWorks is that they allow me to spend considerable time on writing. In particular, I appreciate the regular conversations and ideas I get from Rebecca Parsons, our CTO.
+在这群人中，我要特别感谢Beth Anders-Beck、James Shore和Pete Hodgson在JavaScript方面给我的帮助。
 
-At Pearson, Greg Doench is my acquisition editor, navigating many issues in getting a book to publication. Julie Nahil is my production editor. I was glad to again work with Dmitry Kirsanov for copyediting and Alina Kirsanova for composition and indexing.
+有了一个比较完整的初稿之后，我将它发送出去，寻求更多的审阅意见，因为我希望有一些全新的眼光来纵览全书。William Chargin和Michael Hunger提供了极其详尽的审阅意见。我还从Bob Martin和Scott Davis那里得到了很多有用的意见。Bill Wake也对本书初稿做了完整的审阅，并在邮件列表中给出了他的意见。
+
+我在ThoughtWorks的同事一直给我的写作提供想法和反馈。数不胜数的问题、评论和观点推动着本书的思考与写作。作为ThoughtWorks员工最好的一件事，就是这家公司允许我花大量时间来写作。我尤其要感谢我们的CTO Rebecca Parsons经常与我交流，给了我很多想法。
+
+在培生出版集团，Greg Doench是负责本书的策划编辑，他解决了无数的问题，最终使本书得以出版。Julie Nahil是责任印制。Dmitry Kirsanov负责了文字编辑工作，Alina Kirsanova负责了排版和制作索引，我也很高兴与他们合作。
