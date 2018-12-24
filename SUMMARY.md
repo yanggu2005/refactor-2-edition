@@ -1,6 +1,8 @@
 # Summary
 
-* [Introduction](README.md)
+* [封面](README.md)
+* [坏味道列表](publish/List-of-Smells.md)
+* [重构列表](publish/List-of-Refactorings.md) 
 * [第一版序](publish/00-00-Foreword-to-the-First-Edition.md)
 * [前言](publish/00-01-Preface.md)
 * [第1章：重构，第一个案例](publish/01-00-Refactoring-A-First-Example.md)
@@ -26,7 +28,7 @@
   * [Where Did Refactoring Come From?](publish/02-09-Where-Did-Refactoring-Come-From.md)
   * [Automated Refactorings](publish/02-10-Automated-Refactorings.md)
   * [Going Further](publish/02-11-Going-Further.md)
-* [Chapter 3: Bad Smells in Code](publish/03-00-Bad-Smells-in-Code.md)
+* [第3章：代码的坏味道](publish/03-00-Bad-Smells-in-Code.md)
   * [Mysterious Name](publish/03-01-Mysterious-Name.md)
   * [Duplicated Code](publish/03-02-Duplicated-Code.md)
   * [Long Function](publish/03-03-Long-Function.md)

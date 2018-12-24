@@ -1,7 +1,7 @@
-# Mysterious Name
+# 神秘命名
 
-Puzzling over some text to understand what's going on is a great thing if you're reading a detective novel, but not when you're reading code. We may fantasize about being International Men of Mystery, but our code needs to be mundane and clear. One of the most important parts of clear code is good names, so we put a lot of thought into naming functions, modules, variables, classes, so they clearly communicate what they do and how to use them.
+读侦探小说时，透过一些神秘的文字猜测故事情节是个很棒的体验；但如果是在阅读代码，这样的体验就不怎么好了。我们也许会幻想自己是神秘的国际特工，但我们写下的代码应该直观明了。整洁代码最重要的一环就是好的名字，所以我们会深思熟虑如何给函数、模块、变量和类命名，使得它们能清晰地阐述自己的功能和用法。
 
-Sadly, however, naming is one of the two hard things in programming. So, perhaps the most common refactorings we do are the renames: Change Function Declaration (to rename a function), Rename Variable, and Rename Field. People are often afraid to rename things, thinking it's not worth the trouble, but a good name can save hours of puzzled incomprehension in the future.
+然而，很遗憾，命名是编程中最难的两件事之一。正因为如此，改名可能是最常用的重构手法，包括*Change Function Declaration*（用于给函数改名）、*Rename Variable*、*Rename Field*等。很多人经常不愿意给程序元素改名，觉得不值得费这个劲，但好的名字能节省未来用在猜谜上的大把时间。
 
-Renaming is not just an exercise in changing names. When you can't think of a good name for something, it's often a sign of a deeper design malaise. Puzzling over a tricky name has often led us to significant simplifications to our code.
+改名不仅仅是修改名字而已。如果你想不出一个好名字，很可能意味着背后潜藏着更深的设计问题。为一个恼人的名字所付出的纠结，常常能指出大幅简化代码的机会。

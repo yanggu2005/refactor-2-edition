@@ -1,20 +1,15 @@
 # 第3章：代码的坏味道
 
-by Kent Beck and Martin Fowler
+——Kent Beck和Martin Fowler
 
-If it stinks, change it.
+> “如果尿布臭了，就换掉它。”——语出Beck奶奶，论保持小孩清洁的哲学
 
-— Grandma Beck, discussing child-rearing philosophy
+现在，对于重构如何运作，你已经有了相当好的理解。但是知道“如何”不代表知道“何时”。决定何时重构、何时停止和知道重构机制如何运转一样重要。
 
-By now you have a good idea of how refactoring works. But just because you know how doesn’t mean you know when. Deciding when to start refactoring—and when to stop—is just as important to refactoring as knowing how to operate the mechanics of it.
+难题来了！解释“如何删除一个实例变量”或“如何产生一个继承体系”很容易，因为这些都是很简单的事情。但要解释“该在什么时候做这些动作”就没那么顺理成章了。除了露几手含混的编程美学（说实话，这就是咱这些顾问常做的事），我还希望让某些东西更具说服力一些。
 
-Now comes the dilemma. It is easy to explain how to delete an instance variable or create a hierarchy. These are simple matters. Trying to explain when you should do these things is not so cut-and-dried. Instead of appealing to some vague notion of programming aesthetics (which, frankly, is what we consultants usually do), I wanted something a bit more solid.
+“味道，”你可能会说，“真的比含混的美学理论要好吗?”啊，是的。我们看过很多很多代码，它们所属的项目从大获成功到奄奄一息都有。观察这些代码时，我们学会了从中找寻某些特定结构，这些结构指出（有时甚至就像尖叫呼喊）重构的可能性。（本章主语换成“我们”，是为了反映一个事实：Kent和我共同撰写本章。你应该可以看出我俩的文笔差异——插科打诨的部分是我写的，其余都是他写的。）
 
-When I was writing the first edition of this book, I was mulling over this issue as I visited Kent Beck in Zurich. Perhaps he was under the influence of the odors of his newborn daughter at the time, but he had come up with the notion of describing the “when” of refactoring in terms of smells.
+我们并不试图给你一个何时必须重构的精确衡量标准。从我们的经验看来，没有任何量度规矩比得上一个见识广博者的直觉。我们只会告诉你一些迹象，它会指出“这里有一个可以用重构解决的问题”。你必须培养出自己的判断力，学会判断一个类内有多少实例变量算是太大、一个函数内有多少行代码才算太长。
 
-“Smells,” you say, “and that is supposed to be better than vague aesthetics?” Well, yes. We have looked at lots of code, written for projects that span the gamut from wildly successful to nearly dead. In doing so, we have learned to look for certain structures in the code that suggest—sometimes, scream for—the possibility of refactoring. (We are switching over to “we” in this chapter to reflect the fact that Kent and I wrote this chapter jointly. You can tell the difference because the funny jokes are mine and the others are his.)
-
-One thing we won’t try to give you is precise criteria for when a refactoring is overdue. In our experience, no set of metrics rivals informed human intuition. What we will do is give you indications that there is trouble that can be solved by a refactoring. You will have to develop your own sense of how many instance variables or how many lines of code in a method are too many.
-
-Use this chapter and the table on the inside back cover as a way to give you inspiration when you’re not sure what refactorings to do. Read the chapter (or skim the table) and try to identify what it is you’re smelling, then go to the refactorings we suggest to see whether they will help you. You may not find the exact smell you can detect, but hopefully it should point you in the right direction.
-
+如果你无法确定该进行哪一种重构手法，请阅读本章内容和内封页上的列表来寻找灵感。你可以阅读本章（或快速浏览内封页上的列表）来判断自己闻到的是什么味道，然后再看看我们所建议的重构手法能否帮助你。也许这里所列的“坏味道条款”和你所检测的不尽相符，但愿它们能够为你指引正确方向。
