@@ -1,5 +1,5 @@
-# Duplicated Code
+# Duplicated Code（重复代码）
 
-If you see the same code structure in more than one place, you can be sure that your program will be better if you find a way to unify them. Duplication means that every time you read these copies, you need to read them carefully to see if there's any difference. If you need to change the duplicated code, you have to find and catch each duplication.
+如果你在一个以上的地点看到相同的程序结构，那么可以肯定：设法将它们合而为一，程序会变得更好。一旦有重复代码存在，阅读代码时你就必须加倍仔细，留意其间细微的差异。要修改重复代码时，你也必须找出所有的复本来修改。
 
-The simplest duplicated code problem is when you have the same expression in two methods of the same class. Then all you have to do is Extract Function and invoke the code from both places. If you have code that's similar, but not quite identical, see if you can use Slide Statements to arrange the code so the similar items are all together for easy extraction. If the duplicate fragments are in subclasses of a common base class, you can use Pull Up Method to avoid calling one from another.
+最单纯的Duplicated Code就是“同一个类的两个函数含有相同的表达式”。这时候你需要做的就是采用*Extract Function*提炼出重复的代码，然后让这两个地点都调用被提炼出来的那一段代码。如果重复代码只是相似、但又不是完全相同，请首先尝试用*Slide Statements*重组代码顺序，把相似的部分放在一起以便提炼。如果重复的代码段位于同一个基类的不同子类中，可以使用*Pull Up Method*以避免在两个子类之间互相调用。

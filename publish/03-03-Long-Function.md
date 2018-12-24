@@ -1,20 +1,19 @@
-# Long Function
+# 长函数（Long Function）
 
-In our experience, the programs that live best and longest are those with short functions. Programmers new to such a code base often feel that no computation ever takes place—that the program is an endless sequence of delegation. When you have lived with such a program for a few years, however, you learn just how valuable all those little functions are. All of the payoffs of indirection—explanation, sharing, and choosing—are supported by small functions.
+据我们的经验，活得最长最好的程序，其中的函数都比较短。初次接触到这种代码库的程序员常常会觉得“计算都没有发生”——程序里满是无穷无尽的委派调用。但和这样的程序共处几年之后，你就会明白这些小函数的价值所在。间接性带来的好处——更好的阐释力、更易于分享、更多的选择——都是由小函数来支持的。
 
-Since the early days of programming, people have realized that the longer a function is, the more difficult it is to understand. Older languages carried an overhead in subroutine calls, which deterred people from small functions. Modern languages have pretty much eliminated that overhead for in-process calls. There is still overhead for the reader of the code because you have to switch context to see what the function does. Development environments that allow you to quickly jump between a function call and its declaration, or to see both functions at once, help eliminate this step, but the real key to making it easy to understand small functions is good naming. If you have a good name for a function, you mostly don’t need to look at its body.
+早在编程的洪荒年代，程序员们就已认识到：函数越长，就越难理解。早期的编程语言中，子程序调用需要额外开销，这使得人们不太乐意使用小函数。现代OO语言几乎已经完全免除了进程内的函数调用开销。固然，小函数也会给代码的阅读者带来一些负担，因为你必须经常切换上下文，才能看明白函数在做什么。但现代的开发环境让你可以在函数的调用处与声明处之间快速跳转，或是同时看到这两处，让你根本不用来回跳转。不过说到底，让小函数易于理解的关键还是在于良好的命名。如果你能给函数起个好名字，读者就可以通过名字了解函数的作用，根本不必去看其中写了些什么。
 
-The net effect is that you should be much more aggressive about decomposing functions. A heuristic we follow is that whenever we feel the need to comment something, we write a function instead. Such a function contains the code that we wanted to comment but is named after the intention of the code rather than the way it works. We may do this on a group of lines or even on a single line of code. We do this even if the method call is longer than the code it replaces—
-provided the method name explains the purpose of the code. The key here is not function length but the semantic distance between what the method does and how it does it.
+最终的效果是：你应该更积极地分解函数。我们遵循这样一条原则：每当感觉需要以注释来说明点什么的时候，我们就把需要说明的东西写进一个独立函数中，并以其用途（而非实现手法）命名。我们可以对一组甚至短短一行代码做这件事。哪怕替换后的函数调用动作比函数自身还长，只要函数名称能够解释其用途，我们也该毫不犹豫地那么做。关键不在于函数的长度，而在于函数“做什么”和“如何做”之间的语义距离。
 
-Ninety-nine percent of the time, all you have to do to shorten a function is Extract Function. Find parts of the function that seem to go nicely together and make a new one.
+百分之九十九的场合里，要把函数变小，只需使用Extract Function。找到函数中适合集中在一起的部分，将它们提炼出来形成一个新函数。
 
-If you have a function with lots of parameters and temporary variables, they get in the way of extracting. If you try to use Extract Function, you end up passing so many parameters to the extracted method that the result is scarcely more readable than the original. You can often use Replace Temp with Query to eliminate the temps. Long lists of parameters can be slimmed down with Introduce Parameter Object and Preserve Whole Object.
+如果函数内有大量的参数和临时变量，它们会对你的函数提炼形成阻碍。如果你尝试运用Extract Function，最终就会把许多参数和临时变量当作参数，传递给被提炼出来的新函数，导致可读性几乎没有任何提升。此时，你可以经常运用Replace Temp with Query来消除这些临时元素。Introduce Parameter Object和Preserve Whole Object则可以将过长的参数列变得更简洁一些。
 
-If you’ve tried that and you still have too many temps and parameters, it’s time to get out the heavy artillery: Replace Function with Command.
+如果你已经这么做了，仍然有太多临时变量和参数，那就应该使出我们的杀手锏：Replace Function with Command。
 
-How do you identify the clumps of code to extract? A good technique is to look for comments. They often signal this kind of semantic distance. A block of code with a comment that tells you what it is doing can be replaced by a method whose name is based on the comment. Even a single line is worth extracting if it needs explanation.
+如何确定该提炼哪一段代码呢?一个很好的技巧是：寻找注释。它们通常能指出代码用途和实现手法之间的语义距离。如果代码前方有一行注释，就是在提醒你：可以将这段代码替换成一个函数，而且可以在注释的基础上给这个函数命名。就算只有一行代码，如果它需要以注释来说明，那也值得将它提炼到独立函数去。
 
-Conditionals and loops also give signs for extractions. Use Decompose Conditional to deal with conditional expressions. A big switch statement should have its legs turned into single function calls with Extract Function. If there's more than one switch statement switching on the same condition, you should apply Replace Conditional with Polymorphism.
+条件表达式和循环常常也是提炼的信号。你可以使用Decompose Conditional处理条件表达式。对于庞大的switch语句，其中的每个分支都应该通过Extract Function变成单独的函数调用。如果有多个switch语句基于同一个条件进行分支选择，就应该使用Replace Conditional with Polymorphism。
 
-With loops, extract the loop and the code within the loop into its own method. If you find it hard to give an extracted loop a name, that may be because it's doing two different things—in which case don't be afraid to use Split Loop to break out the separate tasks.
+至于循环，你应该将循环和其内的代码提炼到一个独立函数中。如果你发现提炼出的循环很难命名，可能是因为其中做了几件不同的事。如果是这种情况，不用担心，用Split Loop将其拆分成各自独立的任务即可。
