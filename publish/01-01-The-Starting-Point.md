@@ -1,5 +1,3 @@
-# The Starting Point
-
 # 起点
 
 在本书第一版中，我用的实例程序，是为影片出租店打印一张详单。放到现在，你们很多人可能要问了：「影片出租店是什么」？为避免过多回答这个问题，我翻新了一下例子，将其包装成一个仍有古典韵味，又尚未消亡的现代实例。
@@ -62,21 +60,21 @@ function statement(invoice, plays) {
     let thisAmount = 0;
 
     switch (play.type) {
-      case "tragedy":
-        thisAmount = 40000;
-        if (perf.audience > 30) {
-          thisAmount += 1000 * (perf.audience - 30);
-        }
-        break;
-      case "comedy":
-        thisAmount = 30000;
-        if (perf.audience > 20) {
-          thisAmount += 10000 + 500 * (perf.audience - 20);
-        }
-        thisAmount += 300 * perf.audience;
-        break;
-      default:
-        throw new Error(`unknown type: ${play.type}`);
+    case "tragedy":
+      thisAmount = 40000;
+      if (perf.audience > 30) {
+        thisAmount += 1000 * (perf.audience - 30);
+      }
+      break;
+    case "comedy":
+      thisAmount = 30000;
+      if (perf.audience > 20) {
+        thisAmount += 10000 + 500 * (perf.audience - 20);
+      }
+      thisAmount += 300 * perf.audience;
+      break;
+     default:
+       throw new Error(`unknown type: ${play.type}`);
     }
 
     // add volume credits
