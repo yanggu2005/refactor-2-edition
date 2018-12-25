@@ -376,3 +376,39 @@ function amountFor(perf) {
 这次重构可能使一些程序员感到担忧。最初的代码，play变量的查找代码在每次循环中只执行了一次，而重构后却执行了三次。后续我会讨论重构与性能之间的关系，但现在我认为这个改动还不太可能严重影响性能。即便真的影响了，提升一段整理良好代码的性能，也容易得多。
 
 移除局部变量的福音，就是做提炼时会简单得多，因为你只需要与少量的局部作用域打交道。实际上，做任何提炼前，我一般都会将局部变量抽取出去。
+
+处理完`amountFor`的参数后，我回过头来看一下它的调用点。它被赋值给一个临时变量，之后就不再被改变，因此我又采用了*Inline Variables*手法内联它。
+
+*顶层作用域…*
+
+```javascript
+function statement(invoice, plays) {
+  let totalAmount = 0;
+  let volumeCredits = 0;
+  let result = `Statement for ${invoice.customer}\n`;
+  const format = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 2
+  }).format;
+
+  for (let perf of invoice.performances) {
+    // add volume credits
+    volumeCredits += Math.max(perf.audience - 30, 0);
+    // add extra credit for every ten comedy attendees
+    if ("comedy" === playFor(perf).type) volumeCredits += Math.floor(perf.audience / 5);
+
+    // print line for this order
+    result += ` ${playFor(perf).name}: ${format(amountFor(perf) / 100)} (${
+      perf.audience
+    } seats)\n`;
+    totalAmount += thisAmount;
+  }
+  result += `Amount owed is ${format(amountFor(perf) / 100)}\n`;
+  result += `You earned ${volumeCredits} credits\n`;
+  return result;
+}
+```
+
+## 抽取Volume积分
+
