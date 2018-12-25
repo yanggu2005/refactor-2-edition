@@ -17,7 +17,6 @@ function statement(invoice, plays) {
     const play = plays[perf.playID];
     let thisAmount = 0;
 
-    /* ------------highlight this in blue --------------
     switch (play.type) {
     case "tragedy":
       thisAmount = 40000;
@@ -35,7 +34,6 @@ function statement(invoice, plays) {
      default:
        throw new Error(`unknown type: ${play.type}`);
     }
-    */
     
     // add volume credits
     volumeCredits += Math.max(perf.audience - 30, 0);
