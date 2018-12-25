@@ -1,6 +1,8 @@
-# Feature Envy
+# Feature Envy（依恋情结）
 
 When we modularize a program, we are trying to separate the code into zones to maximize the interaction inside a zone and minimize interaction between zones. A classic case of Feature Envy occurs when a function in one module spends more time communicating with functions or data inside another module than it does within its own module. We've lost count of the times we've seen a function invoking half-a-dozen getter methods on another object to calculate some value. Fortunately, the cure for that case is obvious: The function clearly wants to be with the data, so use Move Function to get it there. Sometimes, only a part of a function suffers from envy, in which case use Extract Function on the jealous bit, and Move Function to give it a dream home.
+
+所谓模块化，就是力求将代码分出区域，最大化区域内部的交互、最小化跨区域的交互。但有时你会发现，一个函数跟另一个模块中的函数或者数据交流格外频繁，远胜于在自己所处模块之内的交流，这就是Feature Envy的典型情况。
 
 Of course not all cases are cut-and-dried. Often, a function uses features of several modules, so which one should it live with? The heuristic we use is to determine which module has most of the data and put the function with that data. This step is often made easier if you use Extract Function to break the function into pieces that go into different places.
 

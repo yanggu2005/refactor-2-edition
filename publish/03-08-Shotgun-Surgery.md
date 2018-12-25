@@ -1,7 +1,7 @@
-# Shotgun Surgery
+# Shotgun Surgery（霰弹式修改）
 
-Shotgun surgery is similar to divergent change but is the opposite. You whiff this when, every time you make a change, you have to make a lot of little edits to a lot of different classes. When the changes are all over the place, they are hard to find, and it’s easy to miss an important change.
+Shotgun Surgery类似Divergent Change，但恰恰相反。如果每遇到某种变化，你都必须在许多不同的类内做出许多小修改，你所面临的坏味道就是Shotgun Surgery。如果需要修改的代码散布四处，你不但很难找到它们，也很容易忘记某个重要的修改。
 
-In this case, you want to use Move Function and Move Field to put all the changes into a single module. If you have a bunch of functions operating on similar data, use Combine Functions into Class. If you have functions that are transforming or enriching a data structure, use Combine Functions into Transform. Split Phase is often useful here if the common functions can combine their output for a consuming phase of logic.
+这种情况下你应该使用*Move Method*和*Move Field*把所有需要修改的代码放进同一个模块。如果有很多函数都在操作相似的数据，可以使用*Combine Functions into Class*。如果有些函数的功能是转化或者充实数据结构，可以使用*Combine Functions into Transform*。如果一些函数的输出可以组合后提供给一段专门使用这些计算结果的逻辑，这种时候常常用得上*Split Phase*。
 
-A useful tactic for shotgun surgery is to use inlining refactorings, such as Inline Function or Inline Class, to pull together poorly separated logic. You'll end up with a Long Method or a Large Class, but can then use extractions to break it up into more sensible pieces. Even though we are inordinately fond of small functions and classes in our code, we aren't afraid of creating something large as an intermediate step to reorganization.
+面对Shotgun Surgery，一个常用的策略就是使用内联（inline）相关的重构——例如*Inline Function*或是*Inline Class*——把本不该分散的逻辑拽回一处。完成内联之后，你可能会闻到Long Method或者Large Class的味道，不过你总可以用提炼（extract）的重构手法将其拆解成更合理的小块。即便如此钟爱小型的函数和类，我们也并不担心在重构的过程中暂时创建一些较大的程序单元。
