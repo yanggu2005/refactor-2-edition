@@ -1,9 +1,9 @@
-# Global Data
+# Global Data（全局数据）
 
-Since our earliest days of writing software, we were warned of the perils of global data—how it was invented by demons from the fourth plane of hell, which is the resting place of any programmer who dares to use it. And, although we are somewhat skeptical about fire and brimstone, it's still one of the most pungent odors we are likely to run into. The problem with global data is that it can be modified from anywhere in the code base, and there's no mechanism to discover which bit of code touched it. Time and again, this leads to bugs that breed from a form of spooky action from a distance—and it's very hard to find out where the errant bit of program is. The most obvious form of global data is global variables, but we also see this problem with class variables and singletons.
+刚开始学软件开发时，我们就听说过关于全局数据的惊悚故事——它们如何被来自地狱第四层的恶魔发明出来，胆敢使用它们的程序员如今在何处安息。就算这些烈焰与硫磺的故事不那么可信，全局数据仍然是最刺鼻的坏味道之一。全局数据的问题在于，从代码库的任何一个角落都可以修改它，没有任何机制可以探测出到底哪段代码触碰了它。一次又一次，全局数据造成了那些诡异的bug，而问题的根源却在遥远的别处，想要找到出错的代码难于登天。全局数据最显而易见的形式就是全局变量，但类变量和单例（singleton）也未能幸免。
 
-Our key defense here is Encapsulate Variable, which is always our first move when confronted with data that is open to contamination by any part of a program. At least when you have it wrapped by a function, you can start seeing where it's modified and start to control its access. Then, it's good to limit its scope as much as possible by moving it within a class or module where only that module's code can see it.
+首要的防御手段是*Encapsulate Variable*，每当我们看到可能被各处的代码污染的数据，这总是我们应对的第一招。当你把全局数据用一个函数包装起来，至少你就能看见修改它的地方，并开始控制对它的访问。随后，最好将这个函数（及其封装的数据）搬移到一个类或模块中，只允许模块内的代码使用它，从而尽量控制其作用域。
 
-Global data is especially nasty when it's mutable. Global data that you can guarantee never changes after the program starts is relatively safe—if you have a language that can enforce that guarantee.
+可以被修改的全局数据尤其可憎。如果能保证在程序启动之后就不再修改，这样的全局数据还算相对安全，不过得有编程语言提供这样的保证才行。
 
-Global data illustrates Paracelsus's maxim: The difference between a poison and something benign is the dose. You can get away with small doses of global data, but it gets exponentially harder to deal with the more you have. Even with little bits, we like to keep it encapsulated—that's the key to coping with changes as the software evolves.
+全局数据印证了帕拉塞尔斯的格言：良药与毒药的区别在于剂量。有少量的全局数据或许无妨，但数量越多，处理的难度就会指数上升。即便只是少量的数据，我们也愿意将它封装起来，这是在软件演进过程中应对变化的关键所在。
