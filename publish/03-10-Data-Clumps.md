@@ -1,7 +1,7 @@
-# Data Clumps
+# Data Clumps（数据泥团）
 
-Data items tend to be like children: They enjoy hanging around together. Often, you’ll see the same three or four data items together in lots of places: as fields in a couple of classes, as parameters in many method signatures. Bunches of data that hang around together really ought to find a home together. The first step is to look for where the clumps appear as fields. Use Extract Class on the fields to turn the clumps into an object. Then turn your attention to method signatures using Introduce Parameter Object or Preserve Whole Object to slim them down. The immediate benefit is that you can shrink a lot of parameter lists and simplify method calling. Don’t worry about data clumps that use only some of the fields of the new object. As long as you are replacing two or more fields with the new object, you’ll come out ahead.
+数据项就像小孩子，喜欢成群结队地待在一块儿。你常常可以在很多地方看到相同的三四项数据：两个类中相同的字段、许多函数签名中相同的参数。这些总是绑在一起出现的数据真应该拥有属于它们自己的对象。首先请找出这些数据以字段形式出现的地方，运用*Extract Class*将它们提炼到一个独立对象中。然后将注意力转移到函数签名上，运用*Introduce Parameter Object*或*Preserve Whole Object*为它减肥。这么做的直接好处是可以将很多参数列缩短，简化函数调用。是的，不必在意Data Clumps只用上新对象的一部分字段，只要以新对象取代两个（或更多）字段，你就值回票价了。
 
-A good test is to consider deleting one of the data values. If you did this, would the others make any sense? If they don’t, it’s a sure sign that you have an object that’s dying to be born.
+一个好的评判办法是：删掉众多数据中的一项。这么做，其他数据有没有因而失去意义?如果它们不再有意义，这就是个明确信号：你应该为它们产生一个新对象。
 
-You'll notice that we advocate creating a class here, not a simple record structure. We do this because using a class gives you the opportunity to make a nice perfume. You can now look for cases of feature envy, which will suggest behavior that can be moved into your new classes. We've often seen this as a powerful dynamic that creates useful classes and can remove a lot of duplication and accelerate future development, allowing the data to become productive members of society.
+我们在这里提倡新建一个类，而不是简单的记录结构，因为一旦拥有新的类，你就有机会让程序散发出一种芳香。得到新的类以后，你就可以着手寻找Feature Envy，这可以帮你指出能够移至新类中的种种程序行为。这是一种有益的动力：有用的类被创建出来，大量的重复被消除，后续开发得以加速，原来的数据泥团终于在它们的小小社会中充分发挥价值。
