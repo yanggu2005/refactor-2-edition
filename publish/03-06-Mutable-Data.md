@@ -1,11 +1,12 @@
-# Mutable Data
+# Mutable Data（可变数据）
 
-Changes to data can often lead to unexpected consequences and tricky bugs. I can update some data here, not realizing that another part of the software expects something different and now fails—a failure that's particularly hard to spot if it only happens under rare conditions. For this reason, an entire school of software development—functional programming—is based on the notion that data should never change and that updating a data structure should always return a new copy of the structure with the change, leaving the old data pristine.
+对数据的修改经常导致出乎意料的结果和难以发现的bug。我在一处更新数据，却没有意识到软件中的另一处期望着完全不同的数据，于是一个功能失效了——如果故障只在很罕见的情况下发生，要找出故障原因就会更加困难。因此，有一整个软件开发的学派——函数式编程——都建立在“数据永不改变”的概念基础上：如果要更新一个数据结构，就返回一份新的数据拷贝，旧的数据仍保持不变。
 
-These kinds of languages, however, are still a relatively small part of programming; many of us work in languages that allow variables to vary. But this doesn't mean we should ignore the advantages of immutability—there are still many things we can do to limit the risks on unrestricted data updates.
+不过这样的编程语言仍然相对小众，大多数程序员使用的语言还是允许变量值改变的。即便如此，我们也不应该忽视不可变性带来的优势——仍然有很多办法可以用于约束对数据的更新，降低其风险。
 
-You can use Encapsulate Variable to ensure that all updates occur through narrow functions that can be easier to monitor and evolve. If a variable is being updated to store different things, use Split Variable both to keep them separate and avoid the risky update. Try as much as possible to move logic out of code that processes the update by using Slide Statements and Extract Function to separate the side-effect-free code from anything that performs the update. In APIs, use Separate Query from Modifier to ensure callers don't need to call code that has side effects unless they really need to. We like to use Remove Setting Method as soon as we can—sometimes, just trying to find clients of a setter helps spot opportunities to reduce the scope of a variable.
+可以用*Encapsulate Variable*来确保所有数据更新操作都通过很少几个函数来进行，使其更容易监控和演进。如果一个变量在不同时候被用于存储不同的东西，可以使用*Split Variable*将其拆分为各自不同用途的变量，从而避免危险的更新操作。使用*Slide Statements*和*Extract Function*尽量把逻辑从处理更新操作的代码中搬移出来，将没有副作用的代码与执行数据更新操作的代码分开。在API中，可以使用*Separate Query from Modifier*确保调用者不会调到有副作用的代码，除非他们真的需要更新数据。我们还乐于尽早使用*Remove Setting Method*——有时只是把setter的使用者找出来看看，就能帮我们发现缩小变量作用域的机会。
 
-Mutable data that can be calculated elsewhere is particularly pungent. It's not just a rich source of confusion, bugs, and missed dinners at home—it's also unnecessary. We spray it with a concentrated solution of vinegar and Replace Derived Variable with Query.
+如果可变数据的值能在其他地方计算出来，这就是一个特别刺鼻的坏味道。它不仅会造成困扰、bug和加班，而且毫无必要。消除这种坏味道的办法很简单，使用一剂Replace Derived Variable with Query即可。
 
-Mutable data isn't a big problem when it's a variable whose scope is just a couple of lines—but its risk increases as its scope grows. Use Combine Functions into Class or Combine Functions into Transform to limit how much code needs to update a variable. If a variable contains some data with internal structure, it's usually better to replace the entire structure rather than modify it in place, using Change Reference to Value.
+如果变量作用域只有几行代码，即使其中的数据可变，也不是什么大问题；但随着变量作用域的扩展，风险也随之增大。可以用*Combine Functions into Class*或者*Combine Functions into Transform*来限制需要对变量进行修改操作的代码量。如果一个变量在其内部结构中包含了数据，通常最好不要直接修改其中的数据，而是用*Change Reference to Value*令其直接替换整个数据结构。
+
