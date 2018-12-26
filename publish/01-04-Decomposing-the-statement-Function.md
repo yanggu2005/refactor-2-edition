@@ -136,7 +136,7 @@ function statement (invoice, plays) {
 
 完成*Extract Function*手法后，我会看看提炼出来的函数，能否快速简单地使它意义更加清晰。一般我做的第一件事就是重命名一些变量，使它们更简洁，比如将`thisAmount`重命名为`result`：
 
-*statement函数…*
+*function statement...*
 
 ```javascript
 function amountFor(perf, play) {
@@ -164,7 +164,7 @@ function amountFor(perf, play) {
 
 我自己的编码规范是，永远将函数的返回值命名为「result」。这样我一眼就知道它的角色。然后我再次编译、测试、提交代码。然后我前往下一个：函数参数。
 
-*statement函数…*
+*function statement...*
 
 ```javascript
 function amountFor(aPerformance, play) {
@@ -204,7 +204,7 @@ function amountFor(aPerformance, play) {
 
 我先将赋值表达式的右边部分提炼出一个函数来。
 
-*statement函数…*
+*function statement...*
 
 ```javascript
 function playFor(aPerformance) {
@@ -284,7 +284,7 @@ function statement(invoice, plays) {
 
 编译-测试-提交。内联变量后，我就可以对`amountFor`函数应用*Change Function Declaration*手法，然后移除`play`参数了。我会分两步走。第一步，我先在`amountFor`函数内部使用新抽取的函数：
 
-*statement函数…*
+*function statement...*
 
 ```javascript
 function amountFor(perf, play) {
@@ -345,7 +345,7 @@ function statement(invoice, plays) {
 }
 ```
 
-*statement函数…*
+*function statement...*
 
 ```javascript
 function amountFor(perf) {
@@ -412,3 +412,408 @@ function statement(invoice, plays) {
 
 ## 抽取Volume积分
 
+现在`statement`函数的内部实现是这样的：
+
+*顶层作用域…*
+
+```javascript
+function statement(invoice, plays) {
+  let totalAmount = 0;
+  let volumeCredits = 0;
+  let result = `Statement for ${invoice.customer}\n`;
+  const format = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 2
+  }).format;
+
+  for (let perf of invoice.performances) {
+    // add volume credits
+    volumeCredits += Math.max(perf.audience - 30, 0);
+    // add extra credit for every ten comedy attendees
+    if ("comedy" === playFor(perf).type) volumeCredits += Math.floor(perf.audience / 5);
+
+    // print line for this order
+    result += ` ${playFor(perf).name}: ${format(amountFor(perf) / 100)} (${
+      perf.audience
+    } seats)\n`;
+    totalAmount += thisAmount;
+  }
+  result += `Amount owed is ${format(amountFor(perf) / 100)}\n`;
+  result += `You earned ${volumeCredits} credits\n`;
+  return result;
+}
+```
+
+现在我们就看到了移除`play`变量的好处，移除了一个局部作用域的变量，提炼volume积分计算逻辑又更简单了些。
+
+我仍需要处理其他两个局部变量。`perf`同样可以轻易作为参数传入，但`volumeCredits`变量则有些棘手。它是个累加变量，每次循环都会更新它的值。因此最简单的方式是，将整块逻辑提炼到新的函数中，然后在新函数中直接返回。
+
+*function statement...*
+
+```javascript
+function volumeCreditsFor(perf) {
+  let volumeCredits = 0;
+  volumeCredits += Math.max(perf.audience - 30, 0);
+  if ("comedy" === playFor(perf).type) volumeCredits += Math.floor(perf.audience / 5);
+  return volumeCredits;
+}
+```
+
+*顶层作用域…*
+
+```javascript
+function statement(invoice, plays) {
+  let totalAmount = 0;
+  let volumeCredits = 0;
+  let result = `Statement for ${invoice.customer}\n`;
+  const format = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 2
+  }).format;
+
+  for (let perf of invoice.performances) {
+    volumeCredits += volumeCreditsFor(perf);
+    
+    // print line for this order
+    result += ` ${playFor(perf).name}: ${format(amountFor(perf) / 100)} (${
+      perf.audience
+    } seats)\n`;
+    totalAmount += thisAmount;
+  }
+  result += `Amount owed is ${format(amountFor(perf) / 100)}\n`;
+  result += `You earned ${volumeCredits} credits\n`;
+  return result;
+}
+```
+
+我还移除了多余的（此处第二条注释还是错误的）注释。
+
+我再次重复编译-测试-提交循环，然后开始重命名新函数里的变量。
+
+*function statement...*
+
+```javascript
+function volumeCreditsFor(aPerformance) {
+  let result = 0;
+  result += Math.max(aPerformance.audience - 30, 0);
+  if ("comedy" === playFor(aPerformance).type) result += Math.floor(aPerformance.audience / 5);
+  return result;
+}
+```
+
+我只作为一个步骤进行了展示，但操作时我依然一次只重命名一个变量，并在每次重命名后进行一次编译-测试-提交。
+
+## 移除`format`变量
+
+我们再看一下`statement`这个主方法：
+
+*顶层作用域…*
+
+```javascript
+function statement(invoice, plays) {
+  let totalAmount = 0;
+  let volumeCredits = 0;
+  let result = `Statement for ${invoice.customer}\n`;
+  const format = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 2
+  }).format;
+
+  for (let perf of invoice.performances) {
+    // add volume credits
+    volumeCredits += Math.max(perf.audience - 30, 0);
+    // add extra credit for every ten comedy attendees
+    if ("comedy" === playFor(perf).type) volumeCredits += Math.floor(perf.audience / 5);
+
+    // print line for this order
+    result += ` ${playFor(perf).name}: ${format(amountFor(perf) / 100)} (${
+      perf.audience
+    } seats)\n`;
+    totalAmount += thisAmount;
+  }
+  result += `Amount owed is ${format(amountFor(perf) / 100)}\n`;
+  result += `You earned ${volumeCredits} credits\n`;
+  return result;
+}
+```
+ 
+正如我上面所指出的，临时变量可能会是问题。它们只对处理它们的代码块中有用，因此临时变量事实上鼓励你写长长的、复杂的函数。下一步，我将要将一些临时变量替换掉。最简单的莫过于从`format`变量入手。这是典型的将函数赋值给变量，而这种场景下我倾向于声明一个函数。
+
+*function statement...*
+
+```javascript
+function format(aNumber) {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 2
+  }).format(aNumber);
+}
+```
+
+*顶层作用域…*
+
+```javascript
+function statement(invoice, plays) {
+  let totalAmount = 0;
+  let volumeCredits = 0;
+  let result = `Statement for ${invoice.customer}\n`;
+
+  for (let perf of invoice.performances) {
+    volumeCredits += volumeCreditsFor(perf);
+
+    // print line for this order
+    result += ` ${playFor(perf).name}: ${format(amountFor(perf) / 100)} (${
+      perf.audience
+    } seats)\n`;
+    totalAmount += thisAmount;
+  }
+  result += `Amount owed is ${format(amountFor(perf) / 100)}\n`;
+  result += `You earned ${volumeCredits} credits\n`;
+  return result;
+}
+```
+
+尽管将函数变量改变成函数声明也是一种重构手法，但这里我既未为它命名，也没有将它纳入目录。还有很多的重构手法我都觉得没那么重要，不需要这样做。上面这个手法我觉得既简单，也少用，因此我觉得不值为其命名。
+
+我对函数名称不很满意——`format`还未能清晰地描述其作用。`formatAsUSD`很表意，但又太长，特别它是被用于模板字符串中这样一个小的范围中。我认为这里真正要强调的是，它格式化的是一个货币数字，因此我选取了一个能体现此意图的命名，并应用了*Change Function Declaration*手法。
+
+*顶层作用域…*
+
+```javascript
+function statement(invoice, plays) {
+  let totalAmount = 0;
+  let volumeCredits = 0;
+  let result = `Statement for ${invoice.customer}\n`;
+
+  for (let perf of invoice.performances) {
+    volumeCredits += volumeCreditsFor(perf);
+
+    // print line for this order
+    result += ` ${playFor(perf).name}: ${usd(amountFor(perf))} (${
+      perf.audience
+    } seats)\n`;
+    totalAmount += thisAmount;
+  }
+  result += `Amount owed is ${usd(amountFor(perf))}\n`;
+  result += `You earned ${volumeCredits} credits\n`;
+  return result;
+}
+```
+
+*function statement...*
+
+```javascript
+function usd(aNumber) {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 2
+  }).format(aNumber/100);
+}
+```
+
+命名既重要又不简单。只有命名恰当时，将大函数分解为小函数才能体现出价值。有了好的名称，我就不必通过阅读函数体来了解其行为。但要一次把名取好是困难的，因此我会使用当下能想到最好的那个。稍后如果想到更好的，我毫不犹豫就会换掉它。通常你需要花几秒钟通读更多代码，才能意识到最好的命名是什么。
+
+重命名的同时，我还将重复的除100行为也搬移到函数里。将金钱存储为以美分为单元的正整数，是种常见的做法——这可以避免将货币的小数部分存为浮点数，同时又不影响我用数学运算符操作它。不过，展示这样一个美分单位的整数时，我总需要展示为美元形式，因此我让格式化函数来处理整除的事宜。
+
+## 移除Volume积分总和
+
+我的下一个目标是`volumeCredits`。处理这个变量更加微妙，因为它是在循环过程累加得到的。第一步，就是应用*Split Loop*将`volumeCredits`的累加过程分离出来：
+
+*顶层作用域…*
+
+```javascript
+function statement(invoice, plays) {
+  let totalAmount = 0;
+  let volumeCredits = 0;
+  let result = `Statement for ${invoice.customer}\n`;
+
+  for (let perf of invoice.performances) {
+    // print line for this order
+    result += ` ${playFor(perf).name}: ${format(amountFor(perf) / 100)} (${
+      perf.audience
+    } seats)\n`;
+    totalAmount += thisAmount;
+  }
+  for (let perf of invoice.performances) {
+    volumeCredits += volumeCreditsFor(perf);
+  }  
+  result += `Amount owed is ${format(amountFor(perf) / 100)}\n`;
+  result += `You earned ${volumeCredits} credits\n`;
+  return result;
+}
+```
+
+完成这一步，我就可以使用*Slide Statement*手法将变量声明挪到到紧邻循环的位置。
+
+```javascript
+function statement(invoice, plays) {
+  let totalAmount = 0;
+  let result = `Statement for ${invoice.customer}\n`;
+  for (let perf of invoice.performances) {
+    // print line for this order
+    result += ` ${playFor(perf).name}: ${format(amountFor(perf) / 100)} (${
+      perf.audience
+    } seats)\n`;
+    totalAmount += thisAmount;
+  }
+  let volumeCredits = 0;
+  for (let perf of invoice.performances) {
+    volumeCredits += volumeCreditsFor(perf);
+  }  
+  result += `Amount owed is ${format(amountFor(perf) / 100)}\n`;
+  result += `You earned ${volumeCredits} credits\n`;
+  return result;
+}
+```
+
+把更新`volumeCredits`变量相关的代码都集中到一起，有利于使用*Replace Temp with Query*。如前所述，第一步是先对变量的计算过程应用*Extract Function*手法。
+
+*function statement...*
+
+```javascript
+function totalVolumeCredits() {
+  let volumeCredits = 0;
+  for (let perf of invoice.performances) {
+    volumeCredites += volumeCreditsFor(perf);
+  }
+  return volumeCredits;
+}
+```
+
+*顶层作用域…*
+
+```javascript
+function statement(invoice, plays) {
+  let totalAmount = 0;
+  let result = `Statement for ${invoice.customer}\n`;
+  for (let perf of invoice.performances) {
+    // print line for this order
+    result += ` ${playFor(perf).name}: ${format(amountFor(perf) / 100)} (${
+      perf.audience
+    } seats)\n`;
+    totalAmount += thisAmount;
+  }
+  let volumeCredits = totalVolumeCredits();
+  result += `Amount owed is ${format(amountFor(perf) / 100)}\n`;
+  result += `You earned ${volumeCredits} credits\n`;
+  return result;
+}
+```
+
+完成函数提炼后，我就能应用*Inline Variables*手法了：
+
+*顶层作用域…*
+
+```javascript
+function statement(invoice, plays) {
+  let totalAmount = 0;
+  let result = `Statement for ${invoice.customer}\n`;
+  for (let perf of invoice.performances) {
+    // print line for this order
+    result += ` ${playFor(perf).name}: ${format(amountFor(perf) / 100)} (${
+      perf.audience
+    } seats)\n`;
+    totalAmount += thisAmount;
+  }
+  result += `Amount owed is ${format(amountFor(perf) / 100)}\n`;
+  result += `You earned ${totalVolumeCredits()} credits\n`;
+  return result;
+}
+```
+
+让我暂停一下，谈谈刚刚完成的修改。首先，我知道有些读者会再次对此修改带来的性能问题感觉担忧，我知道很多人本能警惕重复的循环。但大多数时候，像这样的循环重复一次，对性能的影响可忽略不计。如果你在重构前后进行计时，很可能不会留意到运行速度有明显区别——而且通常都是这样。许多程序员对代码实际的运行路径都所知不足，甚至经验丰富的程序员有时也会这样。在聪明的编译器、现代的缓存技术面前，我们很多直觉都是不准确的。软件的性能通常只与代码的一小部分相关，改变其他的部分对性能贡献甚微。
+
+当然，「大多数」不等同于「所有」。有时，一些重构手法也会显著地降低性能。但即便如此，我通常也不去管它，继续重构，因为回头调解一份结构良好代码的性能，也容易得多。如果我在重构时引入了明显的性能损耗，我后面会花时间进行性能调优。进行调优时，可能会回退我早先做的一些重构——但更多时候，因重构的便利我可以使用更高效的调优方案。最后我得到的是既整洁又高效的代码。
+
+因此对于重构过程的性能问题，我总体的建议是：大多数情况下你可以忽略它。如果重构引入了性能损耗，先完成重构，再做性能优化。
+
+我希望引入你注意的第二点是，我们移除`volumeCredits`时是多么小步。整个过程一共有4步，每一步都伴随着一次编译-测试-向本地代码库的提交：
+
+* 使用*Split Loop*分离出累加过程
+* 使用*Slide Statement*将初始化代码与累加过程集中到一起
+* 使用*Extract Function*提炼出计算总数的函数
+* 使用*Inline Variables*完全移除中间变量
+
+我得坦白，我并非总是如此小步——但事情变复杂时，我的第一反应就是采用更小的步子。怎样算变复杂呢，就是重构过程有测试挂掉，我又无法马上看见并修复问题时，那我就会回滚到最后一次好的提交，然后以更小的步子重做。这得益于我如此频繁的提交。特别是与复杂代码打交道时，细小的步子是快速前进的关键。
+
+然后我要重复同样的步骤来移除`totalAmount`。我以拆解循环开始（然后编译-测试-提交），然后下移变量的初始化（编译-测试-提交），最后再提炼函数。这里有点头疼的是：最好的函数名应该是「totalAmount」，但它已经被变量名占用，我无法都起同一个名字。因此，我提炼函数时先随便给了它一个名字（然后编译-测试-提交）。
+
+*function statement...*
+
+```javascript
+function appleSauce() {
+  let totalAmount = 0;
+  for (let perf of invoice.performances) {
+    totalAmount += amountFor(perf);
+  }
+  return totalAmount;
+}
+```
+
+*顶层作用域…*
+
+```javascript
+function statement (invoice, plays) {
+  let result = `Statement for ${invoice.customer}\n`;
+  for (let perf of invoice.performances) {
+    result += ` ${playFor(perf).name}: ${usd(amountFor(perf))} (${perf.audience} seats)\n`;
+  }
+  let totalAmount = appleSauce();
+ 
+  result += `Amount owed is ${usd(totalAmount)}\n`;
+  result += `You earned ${totalVolumeCredits()} credits\n`;
+  return result;
+}
+```
+
+然后内联变量（编译-测试-提交），并重命名函数，给它一个更有意义的名字（编译-测试-提交）。
+
+*顶层作用域…*
+
+```javascript
+function statement (invoice, plays) {
+  let result = `Statement for ${invoice.customer}\n`;
+  for (let perf of invoice.performances) {
+    result += ` ${playFor(perf).name}: ${usd(amountFor(perf))} (${perf.audience} seats)\n`;
+  }
+  result += `Amount owed is ${usd(totalAmount())}\n`;
+  result += `You earned ${totalVolumeCredits()} credits\n`;
+  return result;
+}
+```
+
+*function statement...*
+
+```javascript
+function totalAmount() {
+  let totalAmount = 0;
+  for (let perf of invoice.performances) {
+    totalAmount += amountFor(perf);
+  }
+  return totalAmount;
+}
+```
+
+趁着重命名提炼后的函数，我顺便将其内部的变量名改了，以与我的编码风格保持统一。
+
+```javascript
+function totalAmount() {
+  let result = 0;
+  for (let perf of invoice.performances) {
+    result += amountFor(perf);
+  }
+  return result;
+}
+function totalVolumeCredits() {
+  let result = 0;
+  for (let perf of invoice.performances) {
+    result += volumeCreditsFor(perf);
+  }
+  return result;
+}
+```
