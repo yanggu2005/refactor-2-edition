@@ -1,9 +1,9 @@
-# Primitive Obsession
+# Primitive Obsession（基本类型偏执）
 
-Most programming environments are built on a widely used set of primitive types: integers, floating point numbers, and strings. Libraries may add some additional small objects such as dates. We find many programmers are curiously reluctant to create their own fundamental types which are useful for their domain—such as money, coordinates, or ranges. We thus see calculations that treat monetary amounts as plain numbers, or calculations of physical quantities that ignore units (adding inches to millimeters), or lots of code doing if (a < upper && a > lower).
+大多数编程环境都大量使用基本类型：整数、浮点数、字符串等等。一些库会引入一些小对象，例如日期。但我们发现一个很有趣的现象：很多程序员不愿意创建对自己的问题域有用的基本类型，例如钱、坐标、范围等等。于是，我们看到了把金钱当做普通数字来计算的情况、计算物理量时无视单位（比如把英寸与毫米相加）的情况、以及大量类似`if (a < upper && a > lower)`这样的代码。
 
-Strings are particularly common petri dishes for this kind of odor: A telephone number is more than just a collection of characters. If nothing else, a proper type can often include consistent display logic for when it needs to be displayed in a user interface. Representing such types as strings is such a common stench that people call them “stringly typed” variables.
+字符串是这种坏味道的最佳培养皿：比如说，电话号码不止是一串字符。一个体面的类型，至少能包含一致的显示逻辑，在用户界面上需要显示时可以使用。“用字符串来代表类似这样的数据”是如此常见的臭味，以至于人们给这类变量专门起了个名字，叫它们“类字符串类型”（stringly typed）变量。
 
-You can move out of the primitive cave into the centrally heated world of meaningful types by using Replace Primitive with Object. If the primitive is a type code controlling conditional behavior, use Replace Type Code with Subclasses followed by Replace Conditional with Polymorphism.
+你可以运用*Replace Primitive with Object* 将原本单独存在的数据值替换为对象，从而走出传统的洞窟，进入炙手可热的对象世界。如果想要替换的数据值是控制条件行为的类型码，则可以运用*Replace Type Code with Subclasses*加上*Replace Conditional with Polymorphism*的组合拳将它换掉。
 
-Groups of primitives that commonly appear together are data clumps and should be civilized with Extract Class and Introduce Parameter Object.
+如果你有一组总是同时出现的基本类型数据，这就是Data Clump的征兆，可运用*Extract Class*和*Introduce Parameter Object*来处理。

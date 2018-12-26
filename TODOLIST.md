@@ -9,7 +9,7 @@
 
 ## terminology
 
-* *function xxx...* 的地方，需不需要翻译function？
+* *function xxx...* 的地方，需不需要翻译function？=> 应该不要，这个还是JS语法，只是省略了一些结构
   * *function statement...*
   * *statement 函数...*
 * keep track of: fully aware and informed about, 跟踪。是否有更好译法

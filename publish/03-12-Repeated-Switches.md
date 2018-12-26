@@ -1,7 +1,7 @@
-# Repeated Switches
+# Repeated Switches（重复的switch）
 
-Talk to a true object-oriented evangelist and they'll soon get onto the evils of switch statements. They'll argue that any switch statement you see is begging for Replace Conditional with Polymorphism. We've even heard some people argue that all conditional logic should be replaced with polymorphism, tossing most ifs into the dustbin of history.
+如果你跟真资格的面向对象布道者交谈，他们很快就会谈到switch语句的邪恶。在他们看来，任何switch语句都应该用*Replace Conditional with Polymorphism*消除掉。我们甚至还听过这样的观点：所有条件逻辑都应该用多态取代，绝大多数if语句都应该被扫进历史的垃圾桶。
 
-Even in our more wild-eyed youth, we were never unconditionally opposed to the conditional. Indeed, the first edition of this book had a smell entitled "switch statements." The smell was there because in the late 90's we found polymorphism sadly underappreciated, and saw benefit in getting people to switch over.
+即便在不知天高地厚的青年时代，我们也从未无条件地反对条件语句。在本书第一版中，这条坏味道被称为“Switch Statements”，那是因为在1990年代末期，程序员们太过于忽视多态的价值，我们希望矫枉过正。
 
-These days there is more polymorphism about, and it isn't the simple red flag that it often was fifteen years ago. Furthermore, many languages support more sophisticated forms of switch statements that use more than some primitive code as their base. So we now focus on the repeated switch, where the same conditional switching logic (either in a switch/case statement or in a cascade of if/else statements) pops up in different places. The problem with such duplicate switches is that, whenever you add a clause, you have to find all the switches and update them. Against the dark forces of such repetition, polymorphism provides an elegant weapon for a more civilized codebase.
+如今的程序员已经更多地使用多态，switch语句也不再像十五年前那样有害无益，很多语言支持更复杂的switch语句，不仅仅可以根据基本类型值来做条件判断。所以我们现在更关注重复的switch：在不同的地方反复使用同样的switch逻辑（可能是以switch/case语句的形式，也可能是以连续的if/else语句的形式）。重复switch的问题在于：每当你想增加一个选择分支时，必须找到所有的switch，并逐一更新。多态给了我们对抗这种重复黑暗力量的武器，使我们得到更优雅的代码库。
