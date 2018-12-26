@@ -1,1 +1,15 @@
 # Much More Than This
+
+That's as far as I'm going to go with this chapter—after all, this is a book on refactoring, not on testing. But testing is an important topic, both because it's a necessary foundation for refactoring and because it's a valuable tool in its own right. While I've been happy to see the growth of refactoring as a programming practice since I wrote this book, I've been even happier to see the change in attitudes to testing. Previously seen as the responsibility of a separate (and inferior) group, testing is now increasingly a first-class concern of any decent software developer. Architectures often are, rightly, judged on their testability.
+
+The kinds of tests I've shown here are unit tests, designed to operate on a small area of the code and run fast. They are the backbone of self-testing code; most tests in such a system are unit tests. There are other kinds of tests too, focusing on integration between components, exercising multiple levels of the software together, looking for performance issues, etc. (And even more varied than the types of tests are the arguments people get into about how to classify tests.)
+
+Like most aspects of programming, testing is an iterative activity. Unless you are either very skilled or very lucky, you won't get your tests right the first time. I find I'm constantly working on the test suite—just as much as I work on the main code. Naturally, this means adding new tests as I add new features, but it also involves looking at the existing tests. Are they clear enough? Do I need to refactor them so I can more easily understand what they are doing? Have I got the right tests? An important habit to get into is to respond to a bug by first writing a test that clearly reveals the bug. Only after I have the test do I fix the bug. By having the test, I know the bug will stay dead. I also think about that bug and its test: Does it give me clues to other gaps in the test suite?
+
+When you get a bug report, start by writing a unit test that exposes the bug.
+
+A common question is, "How much testing is enough?" There's no good measurement for this. Some people advocate using test coverage as a measure, but test coverage analysis is only good for identifying untested areas of the code, not for assessing the quality of a test suite.
+
+The best measure for a good enough test suite is subjective: How confident are you that if someone introduces a defect into the code, some test will fail? This isn't something that can be objectively analyzed, and it doesn't account for false confidence, but the aim of self-testing code is to get that confidence. If I can refactor my code and be pretty sure that I've not introduced a bug because my tests come back green—then I can be happy that I have good enough tests.
+
+It is possible to write too many tests. One sign of that is when I spend more time changing the tests than the code under test—and I feel the tests are slowing me down. But while over-testing does happen, it's vanishingly rare compared to under-testing.
