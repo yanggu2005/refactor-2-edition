@@ -1,8 +1,7 @@
-# Data Class
+# Data Class（纯数据类）
 
-These are classes that have fields, getting and setting methods for the fields, and nothing else. Such classes are dumb data holders and are often being manipulated in far too much detail by other classes. In some stages, these classes may have public fields. If so, you should immediately apply Encapsulate Record before anyone notices. Use Remove Setting Method on any field that should not be changed.
+所谓Data Class是指：它们拥有一些字段，以及用于访问（读写）这些字段的函数，除此之外一无长物。这样的类只是一种不会说话的数据容器，它们几乎一定被其他类过分细琐地操控着。这些类早期可能拥有public字段，果真如此的话，你应该在别人注意到它们之前，立刻运用*Encapsulate Record*将它们封装起来。对于那些不该被其他类修改的字段，请运用*Remove Setting Method*。
 
-Look for where these getting and setting methods are used by other classes. Try to use Move Function to move behavior into the data class. If you can’t move a whole function, use Extract Function to create a function that can be moved.
+然后，找出这些取值/设值函数被其他类运用的地点。尝试以*Move Function*把那些调用行为搬移到纯数据类里来。如果无法搬移整个函数，就运用*Extract Function*产生一个可被搬移的函数。
 
-Data classes are often a sign of behavior in the wrong place, which means you can make big progress by moving it from the client into the data class itself. But there are exceptions, and one of the best exceptions is a record that's being used as a result record from a distinct function invocation. A good example of this is the intermediate data structure after you've applied Split Phase. A key characteristic of such a result record is that it's immutable (at least in practice). Immutable fields don't need to be encapsulated and information derived from immutable data can be represented as fields rather than getting methods.
-
+Data Class常常意味着行为被放在了错误的地方。也就是说，只要把处理数据的行为从使用方搬移到纯数据类里面来，就能使情况大为改观。但也有例外情况，一个最好的例外情况就是，纯数据记录对象被用作函数调用的返回结果，比如使用*Split Phase*之后得到的中介数据结构就是这种情况。这种结果数据对象有一个关键的特征：它是不可修改的（至少在*Split Phase*的实际操作中是这样）。不可修改的字段无须封装，使用者可以直接通过字段取得数据，无须通过取值函数。

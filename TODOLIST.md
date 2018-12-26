@@ -20,3 +20,5 @@
 ## Questions
 
 * Global data that you can guarantee never changes after the program starts is relatively safe—if you have a language that can enforce that guarantee. -- 具体指什么语言的什么特性？
+
+* If there is additional behavior, you can use Replace Superclass with Delegate or Replace Subclass with Delegate to fold the middle man into the real object. That allows you to extend behavior without chasing all that delegation. => 我觉得应该是反过来，Replace Delegation with Inheritance才对，是不是写错了？

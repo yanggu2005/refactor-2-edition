@@ -1,3 +1,3 @@
-# Lazy Element
+# Lazy Element（冗赘的元素）
 
-We like using program elements to add structure—providing opportunities for variation, reuse, or just having more helpful names. But sometimes the structure isn't needed. It may be a function that's named the same as its body code reads, or a class that is essentially one simple function. Sometimes, this reflects a function that was expected to grow and be popular later, but never realized its dreams. Sometimes, it's a class that used to pay its way, but has been downsized with refactoring. Either way, such program elements need to die with dignity. Usually this means using Inline Function or Inline Class. With inheritance, you can use Collapse Hierarchy.
+程序元素（例如类和函数）能给代码增加结构，从而支持变化、促进复用、或者哪怕只是提供更好的名字也好。但有时我们真的不需要这层额外的结构。可能有这样一个函数，它的名字就跟实现代码看起来一模一样；也可能有这样一个类，根本就是一个简单的函数。这可能是因为，起初在编写这个函数时，程序员也许期望它将来有一天会变大、变复杂，但那一天从未到来。也可能是因为，这个类原本是有用的，但随着重构的进行越变越小，最后只剩了一个函数。不论上述哪一种原因，请让这样的程序元素庄严赴义吧。通常你只需要使用*Inline Function*或是*Inline Class*。如果这个类处于一个继承体系中，可以使用*Collapse Hierarchy*。

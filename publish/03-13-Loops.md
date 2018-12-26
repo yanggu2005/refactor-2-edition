@@ -1,3 +1,3 @@
-# Loops
+# Loops（循环语句）
 
-Loops have been a core part of programming since the earliest languages. But we feel they are no more relevant today than bell-bottoms and flock wallpaper. We disdained them at the time of the first edition—but Java, like most other languages at the time, didn't provide a better alternative. These days, however, first-class functions are widely supported, so we can use Replace Loop with Pipeline to retire those anachronisms. We find that pipeline operations, such as filter and map, help us quickly see the elements that are included in the processing and what is done with them.
+从最早的编程语言开始，循环就一直是程序设计的核心要素。但我们感到如今循环已经有点过时，就像喇叭裤和植绒壁纸那样。其实在撰写本书第一版的时候，我们就已经开始鄙视循环语句，但和当时的大多数编程语言一样，当时的Java还没有提供更好的替代品。如今，函数作为一等公民已经得到了广泛的支持，因此我们可以使用*Replace Loop with Pipeline*来让这些老古董退休。我们发现，管道操作（例如filter和map）可以帮助我们更快地看清被处理的元素、以及处理它们的动作。

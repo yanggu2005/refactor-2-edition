@@ -1,8 +1,7 @@
-# Message Chains
+# Message Chains（过长的消息链）
 
-You see message chains when a client asks one object for another object, which the client then asks for yet another object, which the client then asks for yet another another object, and so on. You may see these as a long line of getThis methods, or as a sequence of temps. Navigating this way means the client is coupled to the structure of the navigation. Any change to the intermediate relationships causes the client to have to change.
+如果你看到用户向一个对象请求另一个对象，然后再向后者请求另一个对象，然后再请求另一个对象……这就是消息链。实际代码中你看到的可能是一长串取值函数或一长串临时变量。采取这种方式，意味客户代码将与查找过程中的导航结构紧密耦合。一旦对象间的关系发生任何变化，客户端就不得不做出相应修改。
 
-The move to use here is Hide Delegate. You can do this at various points in the chain. In principle, you can do this to every object in the chain, but doing this often turns every intermediate object into a middle man. Often, a better alternative is to see what the resulting object is used for. See whether you can use Extract Function to take a piece of the code that uses it and then Move Function to push it down the chain. If several clients of one of the objects in the chain want to navigate the rest of the way, add a method to do that.
+这时候你应该使用*Hide Delegate*。你可以在消息链的不同位置进行这种重构手法。理论上，你可以重构消息链上的所有对象，但这么做就会把所有中间对象都变成Middle Man。通常更好的选择是：先观察消息链最终得到的对象是用来干什么的，看看能否以*Extract Function*把使用该对象的代码提炼到一个独立函数中，再运用*Move Function*把这个函数推入消息链。如果这条链上的某个对象有多位客户打算航行此航线的剩余部分，就加一个函数来做这件事。
 
-Some people consider any method chain to be a terrible thing. We are known for our calm, reasoned moderation. Well, at least in this case we are.
-
+有些人把任何函数链都视为坏东西，我们不这样想。呵呵，我们的冷静镇定是出了名的，起码在这件事上是这样。

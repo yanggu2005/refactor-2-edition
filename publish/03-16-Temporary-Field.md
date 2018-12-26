@@ -1,6 +1,5 @@
-# Temporary Field
+# Temporary Field（临时字段）
 
-Sometimes you see a class in which a field is set only in certain circumstances. Such code is difficult to understand, because you expect an object to need all of its fields. Trying to understand why a field is there when it doesn’t seem to be used can drive you nuts.
+有时你会看到这样的对象：其内某个实例变量仅为某种特定情况而设。这样的代码让人不易理解，因为你通常认为对象在所有时候都需要它的所有变量。在变量未被使用的情况下猜测当初其设置目的，会让你发疯的。
 
-Use Extract Class to create a home for the poor orphan variables. Use Move Function to put all the code that concerns the fields into this new class. You may also be able to eliminate conditional code by using Introduce Special Case to create an alternative class for when the variables aren’t valid.
-
+请使用*Extract Class*给这个可怜的孤儿创造一个家，然后用*Move Function*把所有和这个变量相关的代码都放进这个新家。也许你还可以使用*Introduce Special Case*在“变量不合法”的情况下创建一个替代对象，从而避免写出条件式代码。

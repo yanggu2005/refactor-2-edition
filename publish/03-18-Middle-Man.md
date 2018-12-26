@@ -1,6 +1,5 @@
-# Middle Man
+# Middle Man（中间人）
 
-One of the prime features of objects is encapsulation—hiding internal details from the rest of the world. Encapsulation often comes with delegation. You ask a director whether she is free for a meeting; she delegates the message to her diary and gives you an answer. All well and good. There is no need to know whether the director uses a diary, an electronic gizmo, or a secretary to keep track of her appointments.
+对象的基本特征之一就是封装——对外部世界隐藏其内部细节。封装往往伴随委托。比如说你问主管是否有时间参加一个会议，他就把这个消息“委托”给他的记事簿，然后才能回答你。很好，你没必要知道这位主管到底使用传统记事簿或电子记事簿亦或秘书来记录自己的约会。
 
-c However, this can go too far. You look at a class’s interface and find half the methods are delegating to this other class. After a while, it is time to use Remove Middle Man and talk to the object that really knows what’s going on. If only a few methods aren’t doing much, use Inline Function to inline them into the caller. If there is additional behavior, you can use Replace Superclass with Delegate or Replace Subclass with Delegate to fold the middle man into the real object. That allows you to extend behavior without chasing all that delegation.
-
+但是人们可能过度运用委托。你也许会看到某个类接口有一半的函数都委托给其他类，这样就是过度运用。这时应该使用*Remove Middle Man*，直接和真正负责的对象打交道。如果这样“不干实事”的函数只有少数几个，可以运用*Inline Function*把它们放进调用端。如果这些中间人还有其他行为，可以运用*Replace Superclass with Delegate*或者*Replace Subclass with Delegate*把它变成真正的对象，这样你既可以扩展原对象的行为，又不必负担那么多的委托动作。

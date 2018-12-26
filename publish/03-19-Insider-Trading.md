@@ -1,8 +1,7 @@
-# Insider Trading
+# Insider Trading（内部交易）
 
-Software people like strong walls between their modules and complain bitterly about how trading data around too much increases coupling. To make things work, some trade has to occur, but we need to reduce it to a minimum and keep it all above board.
+软件开发者喜欢在模块之间建起高墙，极其反感在模块之间大量交换数据，因为这会增加模块间的耦合。在实际情况里，一定的数据交换不可避免，但我们必须尽量减少这种情况，并把这种交换都放到明面上来。
 
-Modules that whisper to each other by the coffee machine need to be separated by using Move Function and Move Field to reduce the need to chat. If modules have common interests, try to create a third module to keep that commonality in a well-regulated vehicle, or use Hide Delegate to make another module act as an intermediary.
+如果两个模块总是在咖啡机旁边窃窃私语，就应该用*Move Function*和*Move Field*减少它们的私下交流。如果两个模块有共同的兴趣，可以尝试再新建一个模块，把这些共用的数据放在一个管理良好的地方；或者用*Hide Delegate*，把另一个模块变成两者的中介。
 
-Inheritance can often lead to collusion. Subclasses are always going to know more about their parents than their parents would like them to know. If it’s time to leave home, apply Replace Subclass with Delegate or Replace Superclass with Delegate.
-
+继承常会造成密谋，因为子类对超类的了解总是超过后者的主观愿望。如果你觉得该让这个孩子独自生活了，请运用*Replace Subclass with Delegate*或*Replace Superclass with Delegate*让它离开继承体系。

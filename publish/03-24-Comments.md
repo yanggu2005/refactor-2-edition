@@ -1,11 +1,11 @@
-# Comments
+# Comments（注释）
 
-Don’t worry, we aren’t saying that people shouldn’t write comments. In our olfactory analogy, comments aren’t a bad smell; indeed they are a sweet smell. The reason we mention comments here is that comments are often used as a deodorant. It’s surprising how often you look at thickly commented code and notice that the comments are there because the code is bad.
+别担心，我们并不是说你不该写注释。从嗅觉上说，Comments不是一种坏味道，事实上它们还是一种香味呢。我们之所以要在这里提到Comments，是因为人们常把它当作除臭剂来使用。常常会有这样的情况：你看到一段代码有着长长的注释，然后发现，这些注释之所以存在乃是因为代码很糟糕。这种情况的发生次数之多，实在令人吃惊。
 
-Comments lead us to bad code that has all the rotten whiffs we’ve discussed in the rest of this chapter. Our first action is to remove the bad smells by refactoring. When we’re finished, we often find that the comments are superfluous.
+Comments可以带我们找到本章先前提到的各种坏味道。找到坏味道后，我们首先应该以各种重构手法把坏味道去除。完成之后我们常常会发现：注释已经变得多余了，因为代码已经清楚说明了一切。
 
-If you need a comment to explain what a block of code does, try Extract Function. If the method is already extracted but you still need a comment to explain what it does, use Change Function Declaration to rename it. If you need to state some rules about the required state of the system, use Introduce Assertion.
+如果你需要注释来解释一块代码做了什么，试试*Extract Function*；如果函数已经提炼出来，但还是需要注释来解释其行为，试试用*Change Function Declaration*为它改名；如果你需要注释说明某些系统的需求规格，试试*Introduce Assertion*。
 
-When you feel the need to write a comment, first try to refactor the code so that any comment becomes superfluous.
+> 当你感觉需要撰写注释时，请先尝试重构，试着让所有注释都变得多余。
 
-A good time to use a comment is when you don’t know what to do. In addition to describing what is going on, comments can indicate areas in which you aren’t sure. A comment can also explain why you did something. This kind of information helps future modifiers, especially forgetful ones.
+如果你不知道该做什么，这才是注释的良好运用时机。除了用来记述将来的打算之外，注释还可以用来标记你并无十足把握的区域。你可以在注释里写下自己“为什么做某某事”。这类信息可以帮助将来的修改者，尤其是那些健忘的家伙。
