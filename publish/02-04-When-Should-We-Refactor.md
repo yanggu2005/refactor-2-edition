@@ -1,74 +1,84 @@
-# When Should We Refactor?
+# 何时重构
 
-Refactoring is something I do every hour I program. I have noticed a number of ways it fits into my workflow.
+在我编程的每个小时，我都会做重构。有几种方式，可以把重构融入我的工作流中。
 
-The Rule of Three
-Here’s a guideline Don Roberts gave me: The first time you do something, you just do it. The second time you do something similar, you wince at the duplication, but you do the duplicate thing anyway. The third time you do something similar, you refactor.
+> ## 三次法则
 
-Or for those who like baseball: Three strikes, then you refactor.
+> Don Roberts给了我一条准则：第一次做某件事时只管去做；第二次做类似的事会产生反感，但无论如何还是可以去做；第三次再做类似的事，你就应该重构。
 
-Preparatory Refactoring—Making It Easier to Add a Feature
-The best time to refactor is just before I need to add a new feature to the code base. As I do this, I look at the existing code and, often, see that if it were structured a little differently, my work would be much easier. Perhaps there's function that does almost all that I need, but has some literal values that conflict with my needs. Without refactoring I might copy the function and change those values. But that leads to duplicated code—if I need to change it in the future, I'll have to change both spots (and, worse, find them). And copy-paste won't help me if I need to make a similar variation for a new feature in the future. So with my refactoring hat on, I use Parameterize Function. Once I've done that, all I have to do is call the function with the parameters I need.
+> 正如老话说的：事不过三，三则重构。
 
-It’s like I want to go 100 miles east but instead of just traipsing through the woods, I’m going to drive 20 miles north to the highway and then I’m going to go 100 miles east at three times the speed I could have if I just went straight there. When people are pushing you to just go straight there, sometimes you need to say, ‘Wait, I need to check the map and find the quickest route.’ The preparatory refactoring does that for me.
+## 预备性重构：让添加新功能更容易
 
--- Jessica Kerr
+重构的最佳时机就在添加新功能之前。在动手添加新功能之前，我会看看现有的代码库，此时经常会发现：如果对代码结构做一点微调，我的工作会容易得多。也许已经有个函数提供了我需要的大部分功能，但有几个字面量的值与我的需要略有冲突。如果不做重构，我可能会把整个函数拷贝过来，修改这几个值，但这就会导致重复代码——如果将来我需要做修改，就必须同时修改两处（更麻烦的是，我得先找到这两处）。而且，如果将来我还需要一个类似又略有不同的功能，就只能再拷贝粘贴一次，这可不是个好主意。所以我戴上重构的帽子，使用*Parameterize Function*。做完这件事以后，接下来我就只需要调用这个函数，传入我需要的参数。
 
-The same happens when fixing a bug. Once I've found the cause of the problem, I see that it would be much easier to fix should I unify the three bits of copied code causing the error into one. Or perhaps separating some update logic from queries will make it easier to avoid the tangling that's causing the error. By refactoring to improve the situation, I also increase the chances that the bug will stay fixed, and reduce the chances that others will appear in the same crevices of the code.
+> 这就好像我要往东去100英里。我不会一头把车开进树林，而是先往北开20英里上高速，然后再向东开100英里。后者的速度比前者要快上三倍。如果有人催着你“赶快直接去那儿”，有时你需要说：“等等，我要先看看地图，找出最快的路径。”这就是预备性重构于我的意义。
 
-Comprehension Refactoring: Making Code Easier to Understand
-Before I can change some code, I need to understand what it does. This code may have been written by me or by someone else. Whenever I have to think to understand what the code is doing, I ask myself if I can refactor the code to make that understanding more immediately apparent. I may be looking at some conditional logic that's structured awkwardly. I may have wanted to use some existing functions but spent several minutes figuring out what they did because they were named badly.
+> ——Jessica Kerr
 
-At that point I have some understanding in my head, but my head isn't a very good record of such details. As Ward Cunningham puts it, by refactoring I move the understanding from my head into the code itself. I then test that understanding by running the software to see if it still works. If I move my understanding into the code, it will be preserved longer and be visible to my colleagues.
+修复bug时的情况也是一样。在寻找问题根因时，我可能会发现：如果把三段一模一样的、都会导致错误的代码合并到一处，问题修复起来会容易得多。或者如果把某些更新数据的逻辑与查询逻辑分开，会更容易避免造成错误的逻辑纠缠。用重构改善这些情况，在同样场合再次出现同样bug的几率也会降低。
 
-That doesn't just help me in the future—it often helps me right now. Early on, I do comprehension refactoring on little details. I rename a couple variables now that I understand what they are, or I chop a long function into smaller parts. Then, as the code gets clearer, I find I can see things about the design that I could not see before. Had I not changed the code, I probably never would have seen these things, because I’m just not clever enough to visualize all these changes in my head. Ralph Johnson describes these early refactorings as wiping the dirt off a window so you can see beyond. When I’m studying code, refactoring leads me to higher levels of understanding that I would otherwise miss. Those who dismiss comprehension refactoring as useless fiddling with the code don't realize that by foregoing it they never see the opportunities hidden behind the confusion.
+## 帮助理解的重构：使代码更易懂
 
-Litter-Pickup Refactoring
-A variation of comprehension refactoring is when I understand what the code is doing, but realize that it's doing it badly. The logic is unnecessarily convoluted, or I see functions that are nearly identical and can be replaced by a single parameterized function. There's a bit of a tradeoff here. I don't want to spend a lot of time distracted from the task I'm currently doing, but I also don't want to leave the trash lying around and getting in the way of future changes. If it's easy to change, I'll do it right away. If it's a bit more effort to fix, I might make a note of it and fix it when I'm done with my immediate task.
+我需要首先理解代码在干什么，然后才能着手修改。这段代码可能是我写的，也可能是别人写的。一旦我需要思考“这段代码到底在干啥”，我就会自问：能不能重构这段代码，令其一目了然？我可能看见了一段结构糟糕的条件逻辑，也可能对着一个命名糟糕的函数花了几分钟才弄懂它到底在做什么，这些都是重构的机会。
 
-Sometimes, of course, it's going to take a few hours to fix, and I have more urgent things to do. Even then, however, it's usually worthwhile to make it a little bit better. As the old camping adage says, always leave the camp site cleaner than when you found it. If I make it a little better each time I pass through the code, over time it will get fixed. The nice thing about refactoring is that I don't break the code with each small step—so, sometimes, it takes months to complete the job but the code is never broken even when I'm part way through it.
+看代码时，我会在脑海里形成一些理解，但我的记性不好，记不住那么多细节。正如Ward Cunningham所说，通过重构，我就把脑子里的理解转移到了代码本身。随后我可以运行测试，检查这些理解是否正确。如果把对代码的理解植入到代码中，这份知识会保存得更久，并且我的同事也能看到。
 
-Planned and Opportunistic Refactoring
-The examples above—preparatory, comprehension, litter-pickup refactoring—are all opportunistic. I don't set aside time at the beginning to spend on refactoring—instead, I do refactoring as part of adding a feature or fixing a bug. It's part of my natural flow of programming. Whether I'm adding a feature or fixing a bug, refactoring helps me do the immediate task and also sets me up to make future work easier. This is an important point that's frequently missed. Refactoring isn't an activity that's separated from programming—any more than you set aside time to write if statements. I don't put time on my plans to do refactoring; most refactoring happens while I'm doing other things.
+重构带来的帮助不仅发生在将来——常常是立竿见影。我会先在一些小细节上使用重构来帮助理解，给一两个变量改名以便理解它们的用途，或是将一个长函数拆成小块。当代码变得更清晰一些，我就会看见之前看不见的设计问题。如果不做前面的重构，可能永远都看不见这些设计问题，因为我不够聪明，无法在脑海中推演所有这些变化。Ralph Johnson说，这些初步的重构就像扫去窗上的尘埃，使我们得以看到窗外的风景。在研读代码时，重构会引领我获得更高层面的理解，如果只是阅读代码则很难有此领悟。有些人以为这些重构只是毫无意义地把玩代码，他们没有意识到，缺少了这些细微的整理，他们就无法看到隐藏在一片混乱背后的机遇。
 
-You have to refactor when you run into ugly code—but excellent code needs plenty of refactoring too.
+## 捡垃圾式重构
 
-It's also a common error to see refactoring as something people do to fix past mistakes or clean up ugly code. Certainly you have to refactor when you run into ugly code, but excellent code needs plenty of refactoring too. Whenever I write code, I'm making tradeoffs—how much do I need to parameterize, where to draw the lines between functions? The tradeoffs I made correctly for yesterday's feature set may no longer be the right ones for the new features I'm adding today. The advantage is that clean code is easier to refactor when I need to change those tradeoffs to reflect the new reality.
+帮助理解的重构还有一个变体：我已经理解代码在做什么，但发现它做得不好，例如逻辑不必要地迂回复杂，或是两个函数几乎完全相同、可以用一个参数化的函数取而代之。这里有一个取舍：我不想从眼下正经要完成的任务上跑题太多；但我也不想把垃圾留在原地，给将来的修改增加麻烦。如果我发现的垃圾很容易重构，我会马上重构它；如果重构需要花一些精力，我可能会拿一张便签纸把它记下来，完成当下的任务再回来重构它。
 
-for each desired change, make the change easy (warning: this may be hard), then make the easy change -- Kent Beck
+当然，有时这样的垃圾需要好几个小时才能解决，而我又有更紧急的事要完成。不过即便如此，稍微花一点工夫做一点清理，通常都是值得的。正如野营者的老话所说：至少要让营地比你到达时更干净。如果每次经过这段代码时都把它变好一点点，积少成多，垃圾总会被处理干净。重构的妙处就在于，每个小步骤都不会破坏代码——所以，有时一块垃圾在好几个月之后才终于清理干净，但即便每次清理并不完整，代码也不会被破坏。
 
-For a long time, people thought of writing software as a process of accretion: To add new features, we should be mostly adding new code. But good developers know that, often, the fastest way to add a new feature is to change the code to make it easy to add. Software should thus be never thought of as "done." As new capabilities are needed, the software changes to reflect that. Those changes can often be greater in the existing code than in the new code.
+## 有计划的重构和见机行事的重构
 
-All this doesn't mean that planned refactoring is always wrong. If a team has neglected refactoring, it often needs dedicated time to get their code base into a better state for new features, and a week spent refactoring now can repay itself over the next couple of months. Sometimes, even with regular refactoring I'll see a problem area grow to the point when it needs some concerted effort to fix. But such planned refactoring episodes should be rare. Most refactoring effort should be the unremarkable, opportunistic kind.
+上面的例子——预备性重构、帮助理解的重构、捡垃圾式重构——都是见机行事的：我并不专门安排一段时间来重构，而是在添加功能或修复bug的同时顺便重构。这是我自然的编程流的一部分。不管是要添加功能还是修复bug，重构对我当下的任务有帮助，而且让我未来的工作更轻松。这是一件很重要而又常被误解的事：重构不是与编程割裂的行为。你不会专门安排时间重构，正如你不会专门安排时间写`if`语句。我的项目计划上没有专门留给重构的时间，绝大多数重构都在我做其他事的过程中自然发生。
 
-One bit of advice I've heard is to separate refactoring work and new feature additions into different version-control commits. The big advantage of this is that they can be reviewed and approved independently. I'm not convinced of this, however. Too often, the refactorings are closely interwoven with adding new features, and it's not worth the time to separate them out. This can also remove the context for the refactoring, making the refactoring commits hard to justify. Each team should experiment to find what works for them; just remember that separating refactoring commits is not a self-evident principle—it's only worthwhile if it makes life easier.
+> 肮脏的代码必须重构，但精彩的代码也需要很多重构。
 
-Long-Term Refactoring
-Most refactoring can be completed within a few minutes—hours at most. But there are some larger refactoring efforts that can take a team weeks to complete. Perhaps they need to replace an existing library with a new one. Or pull some section of code out into a component that they can share with another team. Or fix some nasty mess of dependencies that they had allowed to build up.
+还有一种常见的误解认为，重构就是人们弥补过去的错误或是清扫肮脏的代码。当然，如果遇上了肮脏的代码，你必须重构；但精彩的代码也需要很多重构。在写代码时，我会做出很多权衡取舍：参数化需要做到什么程度？函数之间的边界应该划在哪里？对于昨天的功能完全合理的权衡，当今天要添加新功能时可能就不再合理。好在，当我需要改变这些权衡以反映现实情况的变化，整洁的代码重构起来会更容易。
 
-Even in such cases, I'm reluctant to have a team do dedicated refactoring. Often, a useful strategy is to agree to gradually work on the problem over the course of the next few weeks. Whenever anyone goes near any code that's in the refactoring zone, they move it a little way in the direction they want to improve. This takes advantage of the fact that refactoring doesn't break the code—each small change leaves everything in a still-working state. To change from one library to another, start by introducing a new abstraction that can act as an interface to either library. Once the calling code uses this abstraction, it's much easier to switch one library for another. (This tactic is called Branch By Abstraction.)
+> 每次要修改时，首先令修改很容易（警告：这件事有时会很难），然后再进行这次容易的修改。——Kent Beck
 
-Refactoring in a Code Review
-Some organizations do regular code reviews; those that don’t would do better if they did. Code reviews help spread knowledge through a development team. Reviews help more experienced developers pass knowledge to those less experienced. They help more people understand more aspects of a large software system. They are also very important in writing clear code. My code may look clear to me but not to my team. That’s inevitable—it’s hard for people to put themselves in the shoes of someone unfamiliar with whatever they are working on. Reviews also give the opportunity for more people to suggest useful ideas. I can only think of so many good ideas in a week. Having other people contribute makes my life easier, so I always look for reviews.
+长久以来，人们认为编写软件是一个累加的过程：要添加新功能，我们就应该增加新代码。但优秀的程序员知道，添加新功能最快的方法往往是首先修改现有的代码，使得新功能容易被加入。所以，软件永远不应该被视为“完成”。每当需要新能力时，软件就应该做出响应的改变。越是在已有代码中，这样的改变就越显重要。
 
-I’ve found that refactoring helps me review someone else’s code. Before I started using refactoring, I could read the code, understand it to some degree, and make suggestions. Now, when I come up with ideas, I consider whether they can be easily implemented then and there with refactoring. If so, I refactor. When I do it a few times, I can see more clearly what the code looks like with the suggestions in place. I don’t have to imagine what it would be like—I can see it. As a result, I can come up with a second level of ideas that I would never have realized had I not refactored.
+不过，说了这么多，并不表示有计划的重构总是错的。如果团队过去忽视了重构，那么常常会需要专门花一些时间来优化代码库，以便更容易添加新功能。一个星期花在重构上的时间，会在未来几个月里发挥价值。有时，即便团队做了日常的重构，还是会有问题在某个区域逐渐累积长大，终于需要专门花些时间来解决。但这种有计划的重构应该很少。大部分重构应该是不起眼的、见机行事的。
 
-Refactoring also helps get more concrete results from the code review. Not only are there suggestions; many suggestions are implemented there and then. You end up with much more of a sense of accomplishment from the exercise.
+我听过的一条建议是：将重构与添加新功能在版本控制的提交中分开。这样做的一大好处是可以各自独立地审阅和批准这些提交。但我并不认同这种做法。重构常常与新添功能紧密交织，不值得花功夫把它们分开。并且这样做也使重构脱离了上下文，使人看不出这些“重构提交”的价值。每个团队应该尝试并找出适合自己的工作方式，只是要记住：区分重构提交并不是毋庸置疑的原则，只有当你真的感到有益时，才值得这样做。
 
-How I'd embed refactoring into a code review depends on the nature of the review. The common pull request model, where a reviewer looks at code without the original author, doesn't work too well. It's better to have the original author of the code present because the author can provide context on the code and fully appreciate the reviewers' intentions for their changes. I've had my best experiences with this by sitting one-on-one with the original author, going through the code and refactoring as we go. The logical conclusion of this style is pair programming: continuous code review embedded within the process of programming.
+## 长期重构
 
-What Do I Tell My Manager?
-One of the most common questions I’ve been asked is, "How to tell a manager about refactoring?" I've certainly seen places were refactoring has become a dirty word—with managers (and customers) believing that refactoring is either correcting errors made earlier, or work that doesn't yield valuable features. This is exacerbated by teams scheduling weeks of pure refactoring—especially if what they are really doing is not refactoring but less careful restructuring that causes breakages in the code base.
+大多数重构可以在几分钟——最多几小时——内完成。但有一些大型的重构可能要花上几个星期，例如要替换一个正在使用的库，或是将整块代码抽取到一个组件中、并共享给另一支团队使用，或是要处理一大堆混乱的依赖关系，等等。
 
-To a manager who is genuinely savvy about technology and understands the design stamina hypothesis, refactoring isn't hard to justify. Such managers should be encouraging refactoring on a regular basis and be looking for signs that indicate a team isn't doing enough. While it does happen that teams do too much refactoring, it's much rarer than teams not doing enough.
+即便在这样的情况下，我仍然不愿让一支团队专门做重构。可以让整个团队达成共识，在未来几周时间里逐步解决这个问题，这经常是一个有效的策略。每当有人靠近“重构区”的代码，就把它朝想要改进的方向推动一点。这个策略的好处在于，重构不会破坏代码——每次小改动之后，整个系统仍然照常工作。例如，如果想替换掉一个正在使用的库，可以首先引入一层新的抽象，使其兼容新旧两个库的接口。当调用方已经完全改为使用这层抽象，替换下面的库就会容易得多。（这个策略叫做Branch By Abstraction。）
 
-Of course, many managers and customer don't have the technical awareness to know how code base health impacts productivity. In these cases I give my more controversial advice: Don’t tell!
+## 复审代码时重构
 
-Subversive? I don’t think so. Software developers are professionals. Our job is to build effective software as rapidly as we can. My experience is that refactoring is a big aid to building software quickly. If I need to add a new function and the design does not suit the change, I find it’s quicker to refactor first and then add the function. If I need to fix a bug, I need to understand how the software works—and I find refactoring is the fastest way to do this. A schedule-driven manager wants me to do things the fastest way I can; how I do it is my responsibility. I'm being paid for my expertise in programming new capabilities fast, and the fastest way is by refactoring—therefore I refactor.
+一些公司会做常规的代码复审（code review），因为这种活动可以改善开发状况。代码复审有助于在开发团队中传播知识，也有助于让较有经验的开发者把知识传递给比较欠缺经验的人，并帮助更多人理解大型软件系统中的更多部分。代码复审对于编写清晰代码也很重要。我的代码也许对我自己来说很清晰，对他人则不然。这是无法避免的，因为要让开发者设身处地为那些不熟悉自己所做所为的人着想，实在太困难了。代码复审也让更多人有机会提出有用的建议，毕竟我在一个星期之内能够想出的好点子很有限。如果能得到别人的帮助，我的生活会滋润得多，所以我总是期待更多复审。
 
-When Should I Not Refactor?
-It may sound like I always recommend refactoring—but there are cases when it's not worthwhile.
+我发现，重构可以帮助我复审别人的代码。开始重构前我可以先阅读代码，得到一定程度的理解，并提出一些建议。一旦想到一些点子，我就会考虑是否可以通过重构立即轻松地实现它们。如果可以，我就会动手。这样做了几次以后，我可以更清楚地看到，当我的建议被实施以后，代码会是什么样。我不必想象代码应该是什么样，我可以真实看见。于是我可以获得更高层次的认识。如果不进行重构，我永远无法得到这样的认识。
 
-If I run across code that is a mess, but I don't need to modify it, then I don't need to refactor it. Some ugly code that I can treat as an API may remain ugly. It's only when I need to understand how it works that refactoring gives me any benefit.
+重构还可以帮助代码复审工作得到更具体的结果。不仅获得建议，而且其中许多建议能够立刻实现。最终你将从实践中得到比以往多得多的成就感。
 
-Another case is when it's easier to rewrite it than to refactor it. This is a tricky decision. Often, I can't tell how easy it is to refactor some code unless I spend some time trying and thus get a sense of how difficult it is. The decision to refactor or rewrite requires good judgment and experience, and I can't really boil it down into a piece of simple advice.
+至于如何在代码复审的过程中加入重构，这要取决于复审的形式。在常见的pull request模式下，复审者独自浏览代码，代码的作者不在旁边，此时进行重构效果并不好。如果代码的原作者在旁边会好很多，因为作者能提供关于代码的上下文信息，并且充分认同复审者进行修改的意图。我个人而言，与原作者肩并肩坐在一起，一边浏览代码一边重构，体验是最佳的。这种工作方式很自然地导向结对编程：在编程的过程中持续不断地进行代码复审。
+
+## 怎么对经理说
+
+“该怎么跟经理说重构的事?”这是我最常被问到的一个问题。毋庸讳言，我见过一些场合，“重构”被视为一个脏词——经理（和客户）认为重构要么是在弥补过去犯下的错误，要么是不增加价值的无用功。如果团队又计划了几周时间专门做重构，情况就更糟糕了——如果他们做的其实还不是重构，而是不加小心的结构调整，然后又对代码库造成了破坏，那可就真是糟透了。
+
+如果这位经理懂技术、能理解“设计耐久性假说”，那么向他说明重构的意义应该不会很困难。这样的精力应该会鼓励日常的重构，并主动寻找团队日常重构做得不够的征兆。虽然“团队做了太多重构”的情况确实也发生过，但比起做得不够的情况要罕见得多了。
+
+当然，很多经理和客户不具备这样的技术意识，他们不理解代码库的健康对生产率的影响。这种情况下我会给团队一个较有争议的建议：不要告诉经理！
+
+这是在搞破坏吗？我不这样想。软件开发者都是专业人士。我们的工作就是尽可能快速创造出高效软件。我的经验告诉我，对于快速创造软件，重构可带来巨大帮助。如果需要添加新功能，而原本设计却又使我无法方便地修改，我发现先重构再添加新功能会更快些。如果要修补错误，就得先理解软件的工作方式，而我发现重构是理解软件的最快方式。受进度驱动的经理要我尽可能快速完事，至于怎么完成，那就是我的事了。我领这份工资，是因为我擅长快速实现新功能；我认为最快的方式就是重构，所以我就重构。
+
+
+## 何时不应该重构
+
+听起来好像我一直在提倡重构，但确实有一些不值得重构的情况。
+
+如果我看见一块凌乱的代码，但并不需要修改它，那么我就不需要重构它。如果丑陋的代码能被隐藏在一个API之下，我就可以容忍它继续保持丑陋。只有当我需要理解其工作的原理时，对其进行重构才有价值。
+
+另一种情况是，如果重写比重构还容易，就别重构了。这是个困难的决定。如果不花一点时间尝试，往往很难真实了解重构一块代码的难度。决定到底该重构还是重写，需要良好的判断力与丰富的经验，我无法给出一条简单的建议。
