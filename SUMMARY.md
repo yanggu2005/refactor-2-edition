@@ -12,7 +12,7 @@
   * [分解`statement`方法](publish/01-04-Decomposing-the-statement-Function.md)
   * [现状：过多的嵌套函数](publish/01-05-Status-Lots-of-Nested-Functions.md)
   * [分离计算阶段与格式化阶段](publish/01-06-Splitting-the-Phases-of-Calculation-and-Formatting.md)
-  * [Status: Separated into Two Files (and Phases)](publish/01-07-Status-Separated-into-Two-Files-and-Phases.md)
+  * [现状：](publish/01-07-Status-Separated-into-Two-Files-and-Phases.md)
   * [Reorganizing the Calculations by Type](publish/01-08-Reorganizing-the-Calculations-by-Type.md)
   * [Status: Creating the Data with the Polymorphic Calculator](publish/01-09-Status-Creating-the-Data-with-the-Polymorphic-Calculator.md)
   * [Final Thoughts](publish/01-10-Final-Thoughts.md)
