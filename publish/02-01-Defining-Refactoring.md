@@ -1,24 +1,23 @@
-# Defining Refactoring
+# 何谓重构
 
-Like many terms in software development, "refactoring" is often used very loosely by practitioners. I use the term more precisely, and find it useful to use it in that more precise form. (These definitions are the same as those I gave in the first edition of this book.) The term "refactoring" can be used either as a noun or a verb. The noun's definition is:
+一线的实践者们经常很随意地使用“重构”这个词——软件开发领域的很多词汇都有此待遇。我使用这个词的方式比较严谨，并且我发现这种严谨的方式很有好处。（下列定义与本书第一版中给出的定义一样。）“重构”这个词可以用作名词或动词。名词形式的定义是：
 
-Refactoring (noun): a change made to the internal structure of software to make it easier to understand and cheaper to modify without changing its observable behavior.
+> 重构（名词）：对软件内部结构的一种调整，目的是在不改变软件可观察行为的前提下，提高其可理解性，降低其修改成本。
 
-This definition corresponds to the named refactorings I've mentioned in the earlier examples, such as Extract Function and Replace Conditional with Polymorphism.
+这个定义适用于我在前面的例子中提到的那些有名字的重构，例如*Extract Function*和*Replace Conditional with Polymorphism*。
 
-The verb's definition is:
+动词形式的定义是：
 
-Refactoring (verb): to restructure software by applying a series of refactorings without changing its observable behavior.
+> 重构（动词）：使用一系列重构手法，在不改变软件可观察行为的前提下，调整其结构。
 
-So I might spend a couple of hours refactoring, during which I would apply a few dozen individual refactorings.
+所以，我可能会花一两个小时进行重构（动词），其间我会使用几十个不同的重构（名词）。
 
-Over the years, many people in the industry have taken to use "refactoring" to mean any kind of code cleanup—but the definitions above point to a particular approach to cleaning up code. Refactoring is all about applying small behavior-preserving steps and making a big change by stringing together a sequence of these behavior-preserving steps. Each individual refactoring is either pretty small itself or a combination of small steps. As a result, when I'm refactoring, my code doesn't spend much time in a broken state, allowing me to stop at any moment even if I haven't finished.
+过去十几年，这个行业里的很多人用“重构”这个词来指代任何形式的代码清理，但上面的定义所指的是一种特定的清理代码的方式。重构的关键在于运用大量微小的、行为保持的步骤，一步步达成大规模的修改。每个单独的重构都很小、或是由若干小步骤组合而成。因此，在重构的过程中，我的代码很少进入不可工作的状态，即便重构没有完成，我也可以在任何时刻停下来。
 
-If someone says their code was broken for a couple of days while they are refactoring, you can be pretty sure they were not refactoring.
+> 如果有人说他们的代码在重构过程中有一两天时间不可用，你基本上可以确定，他们在做的事不是重构。
 
-I use "restructuring" as a general term to mean any kind of reorganizing or cleaning up of a code base, and see refactoring as a particular kind of restructuring. Refactoring may seem inefficient to people who first come across it and watch me making lots of tiny steps, when a single bigger step would do. But the tiny steps allow me to go faster because they compose so well—and, crucially, because I don't spend any time debugging.
+我会用“结构重组”（restructuring）来泛指对代码库进行的各种形式的重新组织或清理，重构则是特定的一类结构重组。刚接触重构的人看我用很多小步骤完成似乎可以一大步就做完的事，可能会觉得这样很低效。但小步前进能让我走得更快，因为这些小步骤能完美地彼此组合，而且——更关键的是——整个过程中我不会花任何时间来调试排错。
 
-In my definitions, I use the phrase "observable behavior." This is a deliberately loose term, indicating that the code should, overall, do just the same things it did before I started. It doesn't mean it will work exactly the same—for example, Extract Function will alter the call stack, so performance characteristics might change—but nothing should change that the user should care about. In particular, interfaces to modules often change due to such refactorings as Change Function Declaration and Move Function. Any bugs that I notice during refactoring should still be present after refactoring (though I can fix latent bugs that nobody has observed yet).
+在上述定义中，我用了“可观察行为”的说法。它的意思是，整体而言，经过重构之后的代码所做的事应该与重构之前大致一样。这个说法并非完全严格，并且我是故意保留这点空间的：重构之后的代码不一定与重构前行为完全一致——比如说，*Extract Function*会改变函数调用栈，因此程序的性能就会有所差别；*Change Function Declaration*和*Move Function*等重构经常会改变模块的接口。不过就用户应该关心的行为而言，不应该有任何改变。如果我在重构过程中发现了任何bug，重构完成后同样的bug应该仍然存在（不过，如果潜在的bug还没有被任何人发现，也可以当即把它改掉）。
 
-Refactoring is very similar to performance optimization, as both involve carrying out code manipulations that don't change the overall functionality of the program. The difference is the purpose: Refactoring is always done to make the code "easier to understand and cheaper to modify." This might speed things up or slow things down. With performance optimization, I only care about speeding up the program, and am prepared to end up with code that is harder to work with if I really need that improved performance.
-
+重构与性能优化有很多相似之处：两者都需要修改代码，并且两者都不会改变程序的整体功能。两者的差别在于其目的：重构是为了让代码“更容易理解、更易于修改”。这可能使程序运行得更快，也可能会更慢。在性能优化时，我只关心让程序运行得更快，最终得到的代码有可能更难理解和维护，对此我有心理准备。

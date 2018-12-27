@@ -1,4 +1,3 @@
-# Chapter 2: Principles in Refactoring
+# 第2章：重构的原则
 
-The example in the previous chapter should have given you a decent feel of what refactoring is. Now you have that, it's a good time to step back and talk about some of the broader principles in refactoring.
-
+前一章所举的例子应该已经让你对重构有了一个大致的感觉。现在，我们应该回头看看重构的一些大原则。
