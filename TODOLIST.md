@@ -12,9 +12,9 @@
 
 * keep track of: fully aware and informed about, 目前翻「跟踪」？
 * bug detector：bug检测器，「器」总觉得俗
-* phase: 目前翻为「阶段」？ 01-06 => 挺好
 * statement: 结算单/详单？目前翻「详单」
-* record：记录？似乎是一类数据结构，有约定俗成翻译否？
+* record：记录？似乎是一类数据结构，有约定俗成翻译否？我理解与「字段」是一个意思
+* [x] phase: 目前翻为「阶段」=> 挺好
 * [x] self-checking：自我检验 - 与原来保持一致
 * [x] extract：继续翻译成提炼还是抽取 => 还是“提炼”好些，我希望尽量保持原来的味道
 
