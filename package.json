@@ -14,11 +14,6 @@
     "init": "gitbook init",
 	"pdf": "gitbook pdf"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "./scripts/lint-changed-markdowns.sh"
-    }
-  },
   "devDependencies": {
     "gitbook-cli": "^2.3.2",
     "husky": "^1.2.1",
