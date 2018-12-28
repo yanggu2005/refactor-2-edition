@@ -16,7 +16,7 @@
 ](publish/01-07-Status-Separated-into-Two-Files-and-Phases.md)
   * [按类型重组计算过程](publish/01-08-Reorganizing-the-Calculations-by-Type.md)
   * [进展：使用了多态性的计算器来提供数据](publish/01-09-Status-Creating-the-Data-with-the-Polymorphic-Calculator.md)
-  * [Final Thoughts](publish/01-10-Final-Thoughts.md)
+  * [结语](publish/01-10-Final-Thoughts.md)
 * [第2章：重构的原则](publish/02-00-Principles-in-Refactoring.md)
   * [何谓重构](publish/02-01-Defining-Refactoring.md)
   * [两顶帽子](publish/02-02-The-Two-Hats.md)
