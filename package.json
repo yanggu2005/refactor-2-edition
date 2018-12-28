@@ -12,12 +12,13 @@
   "scripts": {
     "serve": "gitbook serve",
     "init": "gitbook init",
-	"pdf": "gitbook pdf"
+    "pdf": "gitbook pdf && open book.pdf"
   },
   "devDependencies": {
     "gitbook-cli": "^2.3.2",
     "husky": "^1.2.1",
-    "prettier": "^1.12.1"
+    "prettier": "^1.12.1",
+    "svgexport": "^0.3.2"
   },
   "repository": {
     "type": "git",
