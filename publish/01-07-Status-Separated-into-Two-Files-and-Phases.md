@@ -1,6 +1,6 @@
 # Status: Separated into Two Files (and Phases)
 
-# 现状：已分离到两个文件（和两个文件） - 什么鬼
+# 进展：分离了两个文件（和阶段）
 
 This is a good moment to take stock again and think about where the code is now. I have two files of code.
 

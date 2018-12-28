@@ -12,9 +12,10 @@
   * [分解`statement`方法](publish/01-04-Decomposing-the-statement-Function.md)
   * [现状：过多的嵌套函数](publish/01-05-Status-Lots-of-Nested-Functions.md)
   * [分离计算阶段与格式化阶段](publish/01-06-Splitting-the-Phases-of-Calculation-and-Formatting.md)
-  * [现状：](publish/01-07-Status-Separated-into-Two-Files-and-Phases.md)
+  * [进展：分离了两个文件（和阶段）
+](publish/01-07-Status-Separated-into-Two-Files-and-Phases.md)
   * [按类型重组计算过程](publish/01-08-Reorganizing-the-Calculations-by-Type.md)
-  * [Status: Creating the Data with the Polymorphic Calculator](publish/01-09-Status-Creating-the-Data-with-the-Polymorphic-Calculator.md)
+  * [进展：使用了多态性的计算器来提供数据](publish/01-09-Status-Creating-the-Data-with-the-Polymorphic-Calculator.md)
   * [Final Thoughts](publish/01-10-Final-Thoughts.md)
 * [第2章：重构的原则](publish/02-00-Principles-in-Refactoring.md)
   * [何谓重构](publish/02-01-Defining-Refactoring.md)
