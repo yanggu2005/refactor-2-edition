@@ -10,4 +10,4 @@
 
 > 好代码的衡量标准，就是能否轻易地修改它。
 
-But the most important thing to learn from this example is the rhythm of refactoring. Whenever I’ve shown people how I refactor, they are surprised by how small my steps are, each step leaving the code in a working state that compiles and passes its tests. I was just as surprised myself when Kent Beck showed me how to do this in a hotel room in Detroit two decades ago. The key to effective refactoring is recognizing that you go faster when you take tiny steps, the code is never broken, and you can compose those small steps into substantial changes. Remember that—and the rest is silence.
+这个实例告诉我们最重要的一点，就是重构的节奏感。无论何时，当我向人们展示我如何重构时，人们无不讶异于我的步子之小，每一步都保证代码处于能编译并且通过所有测试的可工作状态。二十年前，在底特律的宾馆里见到Kent Beck展示同样的手法时，我也同样震惊。高效重构的关键在于以下认知：小的步子前进更快、保证代码永远可工作、以及you can compose those small steps into substantial changes。牢记这些，其余的我已别无所言。
