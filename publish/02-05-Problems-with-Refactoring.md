@@ -1,30 +1,32 @@
-# Problems with Refactoring
+# 重构的挑战
 
-Whenever anyone advocates for some technique, tool, or architecture, I always look for problems. Few things in life are all sunshine and clear skies. You need to understand the tradeoffs to decide when and where to apply something. I do think refactoring is a valuable technique—one that should be used more by most teams. But there are problems associated with it, and it's important to understand how they manifest themselves and how we can react to them.
+每当有人大力推荐一种技术、工具或是架构，我总是会观察这东西会遇到哪些挑战，毕竟生活中很少有晴空万里无云的好事。你需要了解一件事背后的权衡取舍，才能决定何时何地应用它。我认为重构是一种很有价值的技术，大多数团队都应该更多地重构，但它也不是完全没有挑战的。有必要充分了解重构会遇到的挑战，这样才能做出有效应对。
 
-Slowing Down New Features
-If you read the previous section, you should already know my response. Although many people see time spent refactoring as slowing down the development of new features, the whole purpose of refactoring is to speed things up. But while this is true, it's also true that the perception of refactoring as slowing things down is still common—and perhaps the biggest barrier to people doing enough refactoring.
+## 延缓新功能开发
 
-The whole purpose of refactoring is to make us program faster, producing more value with less effort.
+如果你读了前面一小节，我对这个挑战的回应便已经很清楚了。尽管很多人认为花在重构的时间是在拖慢新功能开发，但重构的目的就是加速开发。不过尽管如此，“重构会拖慢进度”这种看法仍然很普遍，这可能是导致人们没有充分重构最大的阻力所在。
 
-There is a genuine tradeoff here. I do run into situations where I see a (large-scale) refactoring that really needs to be done, but the new feature I want to add is so small that I prefer to add it and leave the larger refactoring alone. That's a judgment call—part of my professional skills as a programmer. I can't easily describe, let alone quantify, how I make that tradeoff.
+> 重构的整个目的就在于让我们开发更快、用更少的工作量创造更大的价值。
 
-I'm very conscious that preparatory refactoring often makes a change easier, so I certainly will do it if I see that it makes my new feature easier to implement. I'm also more inclined to refactor if this is a problem I've seen before—sometimes it takes me a couple of times seeing some particular ugliness before I decide to refactor it away. Conversely, I'm more likely to not refactor if it's part of the code I rarely touch and the cost of the inconvenience isn't something I feel very often. Sometimes, I delay a refactoring because I'm not sure what improvement to do, although at other times I'll try something as an experiment to see if it makes things better.
+有一种情况确实需要权衡取舍。我有时会看到一个（大规模的）重构很有必要进行，而马上要添加的功能非常小，这时我会更愿意先把新功能加上，然后再做这次大规模重构。做这个决定需要判断力——这是我作为程序员的专业能力之一。我很难描述决定的过程，更无法量化决定的依据。
 
-Still, the evidence I hear from my colleagues in the industry is that too little refactoring is far more prevalent than too much. In other words, most people should try to refactor more often. You may have trouble telling the difference in productivity between a healthy and a sickly code base because you haven't had enough experience of a healthy code base—of the power that comes from easily combining existing parts into new configurations to quickly enable complicated new features.
+我清楚地知道，预备性重构常会使修改更容易，所以如果做一点重构能让新功能实现更容易，我一定会做。如果一个问题我已经见过，此时我也会更倾向于重构它——有时我就得先看见一块丑陋的代码几次，然后才能提起劲头来重构它。另一方面，如果一块代码我很少触碰，它不会经常给我带来麻烦，那么我就倾向于不去重构它。有时我还没想清楚究竟应该如何优化代码，那么我也会延迟重构；不过另一些时候，即便没想清楚优化的方向，我也会先做些实验，试试看能否有所改进。
 
-Although it's often managers that are criticized for the counter-productive habit of squelching refactoring in the name of speed, I've often seen developers do it to themselves. Sometimes, they think they shouldn't be refactoring even though their leadership is actually in favor. If you're a tech lead in a team, it's important to show team members that you value improving the health of a code base. That judgment I mentioned earlier on whether to refactor or not is something that takes years of experience to build up. Those with less experience in refactoring need lots of mentoring to accelerate them through the process.
+我从同事那里听到的证据表明，在我们这个行业里重构不足的情况，远多于重构过度的情况。换句话说，绝大多数人应该尝试多做重构。代码库的健康与否，到底会对生产率造成多大的影响，很多人可能说不出来，因为他们没有太多在健康的代码库上工作的经历——轻松地把现有代码组合配置，快速构造出复杂的新功能，这种强大的开发方式他们没有体验过。
 
-But I think the most dangerous way that people get trapped is when they try to justify refactoring in terms of "clean code," "good engineering practice," or similar moral reasons. The point of refactoring isn't to show how sparkly a code base is—it is purely economic. We refactor because it makes us faster—faster to add features, faster to fix bugs. It's important to keep that in front of your mind and in front of communication with others. The economic benefits of refactoring should always be the driving factor, and the more that is understood by developers, managers, and customers, the more of the "good design" curve we'll see.
+虽然我们经常批评经理们以“保障开发速度”的名义压制重构，其实程序员们自己也经常这么干。有时他们自己觉得不应该重构，其实他们的领导还挺希望他们做一些重构的。如果你是一支团队的技术领导，一定要向团队成员表明，你重视改善代码库健康的价值。合理判断何时应该重构、何时应该暂时不重构，这样的判断力需要多年经验积累。对于重构缺乏经验的年轻人需要有意的指导，才能帮助他们加速经验积累的过程。
 
-Code Ownership
-Many refactorings involve making changes that affect not just the internals of a module but its relationships with other parts of a system. If I want to rename a function, and I can find all the callers to a function, I simply apply Change Function Declaration and change the declaration and the callers in one change. But sometimes this simple refactoring isn't possible. Perhaps the calling code is owned by a different team and I don't have write access to their repository. Perhaps the function is a declared API used by my customers—so I can't even tell if it's being used, let alone by who and how much. Such functions are part of a published interface—an interface that is used by clients independent of those who declare the interface.
+有些人试图用“整洁的代码”、“良好的工程实践”之类道德理由来论证重构的必要性，我认为这是个陷阱。重构的意义不在于把代码库打磨得闪闪发光，而是纯粹经济角度出发的考量。我们之所以重构，因为它能让让我们更快——添加功能更快，修复bug更快。一定要随时记住这一点，与别人交流时也要不断强调这一点。重构应该总是由经济利益驱动。程序员、经理和客户越理解这一点，“好的设计”那条曲线就会越经常出现。
 
-Code ownership boundaries get in the way of refactoring because I cannot make the kinds of changes I want without breaking my clients. This doesn't prevent refactoring—I can still do a great deal—but it does impose limitations. When renaming a function, I need to use Rename Function and to retain the old declaration as a pass-through to the new one. This complicates the interface—but it is the price I must pay to avoid breaking my clients. I may be able to mark the old interface as deprecated and, in time, retire it, but sometimes I have to retain that interface forever.
+## 代码所有权
 
-Due to these complexities, I recommend against fine-grained strong code ownership. Some organizations like any piece of code to have a single programmer as an owner, and only allow that programmer to change it. I’ve seen a team of three people operate in such a way that each one published interfaces to the other two. This led to all sorts of gyrations to maintain interfaces when it would have been much easier to go into the code base and make the edits. My preference is to allow team ownership of code—so that anyone in the same team can modify the team's code, even if originally written by someone else. Programmers may have individual responsibility for areas of a system, but that should imply that they monitor changes to their area of responsibility, not block them by default.
+很多重构手法不仅会影响一个模块内部，还会影响该模块与系统其他部分的关系。比如我想给一个函数改名，并且我也能找到该函数的所有调用者，那么我只需运用*Change Function Declaration*，在一次重构中修改函数声明和调用者。但即便这么简单的一个重构，有时也无法实施：调用方代码可能由另一支团队拥有，而我没有权限写入他们的代码库；这个函数可能是一个提供给客户的API，这时我根本无法知道是否有人使用它，至于谁在用、用得有多频繁就更是一无所知。这样的函数属于已发布接口（published interface）：接口的使用者与声明者彼此独立，声明者无权修改使用者的代码。
 
-Such a more permissive ownership scheme can even exist across teams. Some teams encourage an open-source-like model where people from other teams can change a branch of their code and send the commit in to be approved. This allows one team to change the clients of their functions—they can delete the old declarations once their commits to their clients have been accepted. This can often be a good compromise between strong code ownership and chaotic changes in large systems.
+代码所有权的边界会妨碍重构，因为一旦我自作主张地修改，就一定会破坏使用者的程序。这不会完全阻止重构，我仍然可以做很多重构，但确实会对重构造成约束。为了给一个函数改名，我需要使用*Rename Function*，但同时也得保留原来的函数声明，使其把调用传递给新的函数。这会让接口变复杂，但这就是为了避免破坏使用者的系统而不得不付出的代价。我可以把旧的接口标记为`deprecated`（不推荐使用），等一段时间之后最终让其退休；但有些时候，旧的接口必须一直保留下去。
+
+由于这些复杂性，我建议不要搞细粒度的强代码所有制。有些组织喜欢给每段代码都指定唯一的所有者，只有这个人能修改这段代码。我曾经见过一支只有三个人的团队以这种方式运作，每个程序员都要给另外两人发布接口，随之而来的就是接口维护的种种麻烦。如果这三个人都直接去代码库里做修改，事情会简单得多。我推荐团队代码所有制，这样一支团队里的成员都可以修改这个团队拥有的代码，即便最初写代码的是别人。程序员可能各自分工负责系统的不同区域，但这种责任应该体现为监控自己责任区内发生的修改，而不是简单粗暴地禁止别人修改。
+
+这种较为宽容的代码所有制甚至可以应用于跨团队的场合。有些团队鼓励类似于开源的模型：B团队的成员也可以在一个分支上修改A团队的代码，然后把提交发送给A团队去审核。这样一来，如果团队想修改自己的函数，他们就可以同时修改使用端的代码；只要使用方接受了他们的修改，就可以删掉旧的函数声明了。对于涉及多个团队的大系统开发，在“强代码所有制”和“混乱修改”两个极端之间，这种类似开源的模式常常是一个合适的折衷。
 
 Branches
 As I write this, a common approach in teams is for each team member to work on a branch of the code base using a version control system, and do considerable work on that branch before integrating with a mainline (often called master or trunk) shared across the team. Often, this involves building a whole feature on a branch, not integrating into the mainline until the feature is ready to be released into production. Fans of this approach claim that it keeps the mainline clear of any in-process code, provides a clear version history of feature additions, and allows features to be reverted easily should they cause problems.

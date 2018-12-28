@@ -25,3 +25,5 @@
 * If there is additional behavior, you can use Replace Superclass with Delegate or Replace Subclass with Delegate to fold the middle man into the real object. That allows you to extend behavior without chasing all that delegation. => 我觉得应该是反过来，Replace Delegation with Inheritance才对，是不是写错了？
 
 * 0204：Those changes can often be greater in the existing code than in the new code. => greater是指什么？
+
+* 0205: When renaming a function, I need to use Rename Function and to retain the old declaration as a pass-through to the new one.  => 没有Rename Function这个重构了
