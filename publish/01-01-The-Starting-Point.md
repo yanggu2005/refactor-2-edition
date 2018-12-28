@@ -1,12 +1,12 @@
 # 起点
 
-在本书第一版中，我用的实例程序，是为影片出租店打印一张详单。放到现在，你们很多人可能要问了：「影片出租店是什么」？为避免过多回答这个问题，我翻新了一下例子，将其包装成一个仍有古典韵味，又尚未消亡的现代实例。
+在本书第一版中，我用的实例程序是为影片出租店的顾客打印一张详单。放到今天，你们很多人可能要问了：「影片出租店是什么」？为避免过多回答这个问题，我翻新了下例子，将其包装成一个仍有古典韵味，又尚未消亡的现代实例。
 
-设想一个戏剧演出团，演员们经常要去各种场合演出。一般来讲，顾客会有一些想看的剧场，而演出团则根据观众的多寡及戏剧的类型来收取票价。该团目前上演两类剧场：悲剧和戏剧。除了为顾客观看的演出打印详单外，演出团还推出了「积分优惠」，顾客在参加后续的演出时使用可以打折——你可以把它看做一种提升顾客忠诚度的方式。
+设想有一个戏剧演出团，演员们经常要去各种场合表演戏剧。通常顾客会有一些想看的剧目，而剧团则根据观众的多寡及剧目的类型来收取票价。该团目前出演两种戏剧：悲剧和喜剧。除了为顾客打印演出账单，剧团还推出了「volume积分」优惠，顾客下次观看演出时使用可以打折——你可以把它看做一种提升顾客忠诚度的方式。
 
-该团将其上演的戏剧数据存储在一个简单的JSON文件中，这个文件是这样的：
+该团将剧目的数据存储在一个简单的JSON文件中，这个文件是这样的：
 
-_plays.json..._
+*plays.json...*
 
 ```json
 {
@@ -16,9 +16,9 @@ _plays.json..._
 }
 ```
 
-账单详情也是通过 JSON 文件存储的：
+他们开出的账单也存储在一个JSON文件里中：
 
-_invoices.json..._
+*invoices.json...*
 
 ```json
 [
@@ -42,10 +42,10 @@ _invoices.json..._
 ]
 ```
 
-打印详单的代码是这段简单的函数：
+打印账单的代码来自这段简单的函数：
 
 ```javascript
-function statement(invoice, plays) {
+function statement (invoice, plays) {
   let totalAmount = 0;
   let volumeCredits = 0;
   let result = `Statement for ${invoice.customer}\n`;
@@ -73,8 +73,8 @@ function statement(invoice, plays) {
       }
       thisAmount += 300 * perf.audience;
       break;
-     default:
-       throw new Error(`unknown type: ${play.type}`);
+    default:
+        throw new Error(`unknown type: ${play.type}`);
     }
 
     // add volume credits
@@ -83,18 +83,16 @@ function statement(invoice, plays) {
     if ("comedy" === play.type) volumeCredits += Math.floor(perf.audience / 5);
 
     // print line for this order
-    result += ` ${play.name}: ${format(thisAmount / 100)} (${
-      perf.audience
-    } seats)\n`;
+    result += `  ${play.name}: ${format(thisAmount/100)} (${perf.audience} seats)\n`;
     totalAmount += thisAmount;
   }
-  result += `Amount owed is ${format(totalAmount / 100)}\n`;
+  result += `Amount owed is ${format(totalAmount/100)}\n`;
   result += `You earned ${volumeCredits} credits\n`;
   return result;
 }
 ```
 
-使用上面的测试数据运行这段代码，会有如下输出：
+用以上测试数据文件作为输入运行这段代码，会得到如下输出：
 
 ```
 Statement for BigCo
