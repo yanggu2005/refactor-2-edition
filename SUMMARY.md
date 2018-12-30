@@ -10,7 +10,7 @@
   * [对此起始程序的评价](publish/01-02-Comments-on-the-Starting-Program.md)
   * [重构的第一步](publish/01-03-The-First-Step-in-Refactoring.md)
   * [分解`statement`方法](publish/01-04-Decomposing-the-statement-Function.md)
-  * [现状：过多的嵌套函数](publish/01-05-Status-Lots-of-Nested-Functions.md)
+  * [进展：拥有了更多的嵌套函数](publish/01-05-Status-Lots-of-Nested-Functions.md)
   * [分离计算阶段与格式化阶段](publish/01-06-Splitting-the-Phases-of-Calculation-and-Formatting.md)
   * [进展：分离了两个文件（和阶段）
 ](publish/01-07-Status-Separated-into-Two-Files-and-Phases.md)
