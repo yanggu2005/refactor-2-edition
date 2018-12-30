@@ -1,16 +1,15 @@
-# Refactoring and the Wider Software Development Process
+# 重构与软件开发过程
 
-If you've read the earlier section on problems, one lesson you've probably drawn is that the effectiveness of refactoring is tied to other software practices that a team uses. Indeed, refactoring's early adoption was as part of Extreme Programming (XP), a process which was notable for putting together a set of relatively unusual and interdependent practices—such as continuous integration, self-testing code, and refactoring (the latter two woven into test-driven development).
+读完前面“重构的挑战”一节，你大概已经有这个印象：重构是否有效，与团队采用的其他软件开发实践紧密相关。重构起初是作为极限编程（XP）的一部分被人们采用的，XP本身就融合了一组不太常见、而又彼此关联的实践，例如持续集成、自测试代码、以及重构（后两者融汇成了测试驱动开发）。
 
-Extreme Programming was one of the first agile software methods and, for several years, led the rise of agile techniques. Enough projects now use agile methods that agile thinking is generally regarded as mainstream—but in reality most "agile" projects only use the name. To really operate in an agile way, a team has to be capable and enthusiastic refactorers—and for that, many aspects of their process have to align with making refactoring a regular part of their work.
+极限编程是最早的敏捷软件开发方法之一。在一段历史时期，极限编程引领了敏捷的崛起。如今已经有很多项目使用敏捷方法，敏捷的思维方式也可以被视为主流，但实际上大部分“敏捷”项目只是徒有其名。要真正以敏捷的方式运作项目，团队成员必须在重构上面有能力、有热情，他们采用的开发过程必须与常规的、持续的重构相匹配。
 
-The first foundation for refactoring is self-testing code. By this, I mean that there is a suite of automated tests that I can run and be confident that, if I made an error in my programming, some test will fail. This is such an important foundation for refactoring that I'll spend a chapter talking more about this.
+重构的第一块基石是自测试代码。我应该有一套自动化的测试，我可以频繁地运行它们，并且我有信心：如果我在编程过程中犯了任何错误，会有测试失败。这块基石如此重要，我会专门用一章篇幅来讨论它。
 
-To refactor on a team, it's important that each member can refactor when they need to without interfering with others' work. This is why I encourage Continuous Integration. With CI, each member's refactoring efforts are quickly shared with their colleagues. No one ends up building new work on interfaces that are being removed, and if the refactoring is going to cause a problem with someone else's work, we know about this quickly. Self-testing code is also a key element of Continuous Integration, so there is a strong synergy between the three practices of self-testing code, continuous integration, and refactoring.
+如果一支团队想要重构，每个团队成员都需要掌握重构技能，能在需要时开展重构，而不会干扰其他人的工作。这也是为什么我鼓励持续集成的原因：有了CI，每个成员的重构都能快速分享给其他同事，不会发生这边在调用一个接口、那边却已把这个接口删掉的情况；如果一次重构会影响别人的工作，我们很快就会知道。自测试的代码也是持续集成的关键环节，所以这三大实践——自测试代码、持续集成、重构——彼此之间有着很强的协同效应。
 
-With this trio of practices in place, we enable the Yagni design approach that I talked about in the previous section. Refactoring and yagni positively reinforce each other: Not just is refactoring (and its prerequisites) a foundation for yagni—yagni makes it easier to do refactoring. This is because it's easier to change a simple system than one that has lots of speculative flexibility included. Balance these practices, and you can get into a virtuous circle with a code base that responds rapidly to changing needs and is reliable.
+有这三大实践在手，我们就能运用前一节介绍的YAGNI设计方法。重构和YAGNI交相呼应、彼此增效，重构（及其前置实践）是YAGNI的基础，YAGNI又让重构更易于开展：比起一个塞满了想当然的灵活性的系统，当然是修改一个简单的系统要容易得多。在这些实践之间找到合适的平衡点，你就能进入良性循环，你的代码既牢固可靠、又能快速响应变化的需求。
 
-With these core practices in place, we have the foundation to take advantage of the other elements of the agile mindset. Continuous Delivery keeps our software in an always-releasable state. This is what allows many web organizations to release updates many times a day—but even if we don't need that, it reduces risk and allows us to schedule our releases to satisfy business needs rather than technological constraints. With a firm technical foundation, we can drastically reduce the time it takes to get a good idea into production code, allowing us to better serve our customers. Furthermore, these practices increase the reliability of our software, with less bugs to spend time fixing.
+有这三大核心实践打下的基础，才谈得上运用敏捷思想的其他部分。持续集成确保软件始终处于可发布的状态，很多互联网团队能做到一天多次发布，靠的正是持续集成的威力。即便我们不需要如此频繁的发布，持续集成也能帮我们降低风险，并使我们做到根据业务需要随时安排发布，而不受技术的局限。有了可靠的技术根基，我们能够极大地压缩“从好点子到生产代码”的周期时间，从而更好地服务客户。这些技术实践也会增加软件的可靠性，减少耗费在bug上的时间。
 
-Stated like this, it all sounds rather simple—but in practice it isn't. Software development, whatever the approach, is a tricky business, with complex interactions between people and machines. The approach I describe here is a proven way to handle this complexity, but like any approach, it requires practice and skill.
-
+这一切说起来似乎很简单，但实际做起来毫不容易。不管采用什么方法，软件开发都是一件复杂而微妙的事，涉及人与人之间、人与机器之间的复杂交互。我在这里描述的方法已经被证明可以应对这些复杂性，但——就跟其他所有方法一样——对使用者的实践和技能有要求。
